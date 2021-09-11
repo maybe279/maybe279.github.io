@@ -160,7 +160,7 @@
     </div>
 </div>
 <input type="hidden" id="yelog_site_posts_number" value="1">
-<input type="hidden" id="yelog_site_word_count" value="565">
+<input type="hidden" id="yelog_site_word_count" value="609">
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
     <span id="busuanzi_value_site_pv"></span>
@@ -263,12 +263,12 @@
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2021-09-12 00:13:16'>2021-09-12 00:11</time>
+            发布时间 : <time class="date" title='最后更新: 2021-09-12 00:35:25'>2021-09-12 00:11</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:565</span>
+        <span>字数:609</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -318,15 +318,25 @@
 <li>社会工程学，想办法让服主说出面板密码（如果存在），或者让他装上带后门的插件</li>
 </ol>
 <h2 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h2><p>首先做信息收集，已知其游戏服务器进入的域名为 ***.xyz，打算查他的ip，先ping了目标，然后ping不通，尝试nslookup，发现挂了VPN的查的到，不挂查不到，同时发现这是个NS解析的域名，推测是绑了cdn，但是这又很不符合特征，绑了cdn也应该查的到，就非常的奇怪</p>
-<p><img src="/2021/09/12/MINCRACK/Blog\source_posts\MINCRACK\image-20210911235007172.png" alt="image-20210911235007172"></p>
-<p><img src="/2021/09/12/MINCRACK/Blog\source_posts\MINCRACK\image-20210911233158538.png" alt="image-20210911233158538"></p>
+<p><img src="/2021/09/12/MINCRACK/image-20210911235007172.png"></p>
+<p><img src="/2021/09/12/MINCRACK/image-20210911233158538.png"></p>
 <p>尝试直接进游戏然后tasklist看pid，再netstat查看对应的tcp连接，对比进服和没进服的连接，推测出了IP地址</p>
-<p><img src="/2021/09/12/MINCRACK/Blog\source_posts\MINCRACK\image-20210911234710682.png" alt="image-20210911234710682"></p>
+<p><img src="/2021/09/12/MINCRACK/image-20210911234710682.png"></p>
 <p>将游戏地址改成这个IP和端口，成功进入</p>
 <p>然后我尝试找出为什么会导致查不到ip的原因，最终在油管上找到了一个反查ip的视频，他说了目标服务器用了SRV解析隐藏了真实域名，不过他直接ping出来ip地址（伪的）了，我尝试用相同的方法，成功获取到域名，并得到和刚才一样的ip。</p>
-<p><img src="/2021/09/12/MINCRACK/Blog\source_posts\MINCRACK\image-20210911235620088.png" alt="image-20210911235620088"></p>
-<p>把服务器地址改为出来的mcxx.xxx.cn，结果被断了，应该是服务器没有做这个域名的解析导致的!<img src="/2021/09/12/MINCRACK/Blog\source_posts\MINCRACK\image-20210911232532116.png" alt="image-20210911232532116"></p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=DJnXztiyAmI">https://www.youtube.com/watch?v=DJnXztiyAmI</a></li>
+</ul>
+<p><img src="/2021/09/12/MINCRACK/image-20210911235620088.png"></p>
+<p>把服务器地址改为出来的mcxx.xxx.cn，结果被断了，应该是服务器没有做这个域名的解析导致的!<img src="/2021/09/12/MINCRACK/image-20210911232532116.png"></p>
 <p>至此，我们已经得到了目标服务器的IP地址，但是针对其的资产收集还有各种测试还有待完成，就暂且先做到这，等以后有空再继续进行渗透。</p>
+<blockquote>
+<p>[服务器IP] 222.x.x.89:30890</p>
+<p>[真实域名] mc.x.cn</p>
+<p>[伪装域名] xaft.xyz</p>
+<p>[暂无] e5-a14-auto.x.com</p>
+<p>[暂无] 108.x.x.10.choopa.net</p>
+</blockquote>
 <h2 id="未完待续"><a href="#未完待续" class="headerlink" title="未完待续"></a>未完待续</h2><hr>
 
       
@@ -338,10 +348,10 @@
 
 <div class="article_copyright">
     <p><span class="copy-title">文章标题:</span>MINECRACK</p>
-    <p><span class="copy-title">字数:</span><span class="post-count">565</span></p>
+    <p><span class="copy-title">字数:</span><span class="post-count">609</span></p>
     <p><span class="copy-title">本文作者:</span><a  title="擦皮">擦皮</a></p>
     <p><span class="copy-title">发布时间:</span>2021-09-12, 00:11:12</p>
-    <p><span class="copy-title">最后更新:</span>2021-09-12, 00:13:16</p>
+    <p><span class="copy-title">最后更新:</span>2021-09-12, 00:35:25</p>
     <span class="copy-title">原始链接:</span><a class="post-url" href="/2021/09/12/MINCRACK/" title="MINECRACK">http://example.com/2021/09/12/MINCRACK/</a>
     <p>
         <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">&#34;署名-非商用-相同方式共享 4.0&#34;</a> 转载请保留原文链接及作者。
