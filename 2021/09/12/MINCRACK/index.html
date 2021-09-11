@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>分类 | 擦皮的博客</title>
-  <meta name="keywords" content="">
-  <meta name="description" content="分类 | 擦皮的博客">
+  <title>MINECRACK | 擦皮的博客</title>
+  <meta name="keywords" content=" 委托 ">
+  <meta name="description" content="MINECRACK | 擦皮的博客">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta property="og:type" content="website">
 <meta property="og:title" content="关于">
@@ -244,24 +244,31 @@
 </aside>
 <div id="post">
     <div class="pjax">
-        <article id="page-" class="article article-type-page" itemscope itemprop="blogPost">
+        <article id="post-MINCRACK" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">分类</h1>
+        <h1 class="article-title">MINECRACK</h1>
     
     <div class="article-meta">
         
         
         
+        
+        <span class="tag">
+            <i class="iconfont icon-tag"></i>
+            
+            <a class="color3">委托</a>
+            
+        </span>
         
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2021-09-11 01:33:54'>2021-09-01 08:00</time>
+            发布时间 : <time class="date" title='最后更新: 2021-09-12 00:13:16'>2021-09-12 00:11</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:0</span>
+        <span>字数:565</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -280,7 +287,7 @@
     
     <div class="toc-ref">
     
-        
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9B%AE%E6%A0%87"><span class="toc-text">目标</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MC%E5%BC%80%E6%9C%8D%E6%96%B9%E6%B3%95"><span class="toc-text">MC开服方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%9D%E8%B7%AF"><span class="toc-text">思路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86"><span class="toc-text">信息收集</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%AA%E5%AE%8C%E5%BE%85%E7%BB%AD"><span class="toc-text">未完待续</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -296,7 +303,32 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <h2 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h2><p>针对一个MC正版服，有百人规模，受好友委托想要让其游戏角色获得op权限，不进行任何破坏性举动，腐竹亦是好友的好友。</p>
+<h2 id="MC开服方法"><a href="#MC开服方法" class="headerlink" title="MC开服方法"></a>MC开服方法</h2><ol>
+<li>本地搭建然后内网穿透</li>
+<li>购买vps搭建</li>
+<li>第三方面板服</li>
+<li>Realms</li>
+</ol>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><ol>
+<li>如果对方存在面板，可以尝试进面板然后加附带后门的插件</li>
+<li>如果存在其他服务如ssh，ftp或者有网站、开放数据库等，进行测试看看能不能进去</li>
+<li>进行资产收集看看其他目标有没有突破口</li>
+<li>C段测试其他目标弱点，看看是不是处于一个内网</li>
+<li>社会工程学，想办法让服主说出面板密码（如果存在），或者让他装上带后门的插件</li>
+</ol>
+<h2 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h2><p>首先做信息收集，已知其游戏服务器进入的域名为 ***.xyz，打算查他的ip，先ping了目标，然后ping不通，尝试nslookup，发现挂了VPN的查的到，不挂查不到，同时发现这是个NS解析的域名，推测是绑了cdn，但是这又很不符合特征，绑了cdn也应该查的到，就非常的奇怪</p>
+<p><img src="/2021/09/12/MINCRACK/Blog\source_posts\MINCRACK\image-20210911235007172.png" alt="image-20210911235007172"></p>
+<p><img src="/2021/09/12/MINCRACK/Blog\source_posts\MINCRACK\image-20210911233158538.png" alt="image-20210911233158538"></p>
+<p>尝试直接进游戏然后tasklist看pid，再netstat查看对应的tcp连接，对比进服和没进服的连接，推测出了IP地址</p>
+<p><img src="/2021/09/12/MINCRACK/Blog\source_posts\MINCRACK\image-20210911234710682.png" alt="image-20210911234710682"></p>
+<p>将游戏地址改成这个IP和端口，成功进入</p>
+<p>然后我尝试找出为什么会导致查不到ip的原因，最终在油管上找到了一个反查ip的视频，他说了目标服务器用了SRV解析隐藏了真实域名，不过他直接ping出来ip地址（伪的）了，我尝试用相同的方法，成功获取到域名，并得到和刚才一样的ip。</p>
+<p><img src="/2021/09/12/MINCRACK/Blog\source_posts\MINCRACK\image-20210911235620088.png" alt="image-20210911235620088"></p>
+<p>把服务器地址改为出来的mcxx.xxx.cn，结果被断了，应该是服务器没有做这个域名的解析导致的!<img src="/2021/09/12/MINCRACK/Blog\source_posts\MINCRACK\image-20210911232532116.png" alt="image-20210911232532116"></p>
+<p>至此，我们已经得到了目标服务器的IP地址，但是针对其的资产收集还有各种测试还有待完成，就暂且先做到这，等以后有空再继续进行渗透。</p>
+<h2 id="未完待续"><a href="#未完待续" class="headerlink" title="未完待续"></a>未完待续</h2><hr>
+
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 3084732245@qq.com </span>
     </div>
@@ -304,6 +336,40 @@
 
 
 
+<div class="article_copyright">
+    <p><span class="copy-title">文章标题:</span>MINECRACK</p>
+    <p><span class="copy-title">字数:</span><span class="post-count">565</span></p>
+    <p><span class="copy-title">本文作者:</span><a  title="擦皮">擦皮</a></p>
+    <p><span class="copy-title">发布时间:</span>2021-09-12, 00:11:12</p>
+    <p><span class="copy-title">最后更新:</span>2021-09-12, 00:13:16</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/2021/09/12/MINCRACK/" title="MINECRACK">http://example.com/2021/09/12/MINCRACK/</a>
+    <p>
+        <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">&#34;署名-非商用-相同方式共享 4.0&#34;</a> 转载请保留原文链接及作者。
+    </p>
+</div>
+
+
+
+    <div id="comments"></div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+
+<script type="text/javascript">
+    $.getScript('/js/gitalk.js', function () {
+        var gitalk = new Gitalk({
+            clientID: '2caa4b435c878afb2b28',
+            clientSecret: '42a3dd6935e67ce536c5660b95e736c5bc109f91',
+            repo: 'maybe279.github.io',
+            owner: 'maybe279',
+            admin: ['maybe279'],
+            id: decodeURI(location.pathname),
+            distractionFreeMode: 'true',
+            language: 'zh-CN',
+			proxy: 'https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token',
+            perPage: parseInt('10',10)
+        })
+        gitalk.render('comments')
+    })
+</script>
 
 
 

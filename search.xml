@@ -2,6 +2,25 @@
 <search> 
   
   
+    
+    <entry>
+      <title>MINECRACK</title>
+      <link href="/2021/09/12/MINCRACK/"/>
+      <url>/2021/09/12/MINCRACK/</url>
+      
+        <content type="html"><![CDATA[<h2 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h2><p>针对一个MC正版服，有百人规模，受好友委托想要让其游戏角色获得op权限，不进行任何破坏性举动，腐竹亦是好友的好友。</p><h2 id="MC开服方法"><a href="#MC开服方法" class="headerlink" title="MC开服方法"></a>MC开服方法</h2><ol><li>本地搭建然后内网穿透</li><li>购买vps搭建</li><li>第三方面板服</li><li>Realms</li></ol><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><ol><li>如果对方存在面板，可以尝试进面板然后加附带后门的插件</li><li>如果存在其他服务如ssh，ftp或者有网站、开放数据库等，进行测试看看能不能进去</li><li>进行资产收集看看其他目标有没有突破口</li><li>C段测试其他目标弱点，看看是不是处于一个内网</li><li>社会工程学，想办法让服主说出面板密码（如果存在），或者让他装上带后门的插件</li></ol><h2 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h2><p>首先做信息收集，已知其游戏服务器进入的域名为 ***.xyz，打算查他的ip，先ping了目标，然后ping不通，尝试nslookup，发现挂了VPN的查的到，不挂查不到，同时发现这是个NS解析的域名，推测是绑了cdn，但是这又很不符合特征，绑了cdn也应该查的到，就非常的奇怪</p><p><img src="/2021/09/12/MINCRACK/Blog\source_posts\MINCRACK\image-20210911235007172.png" alt="image-20210911235007172"></p><p><img src="/2021/09/12/MINCRACK/Blog\source_posts\MINCRACK\image-20210911233158538.png" alt="image-20210911233158538"></p><p>尝试直接进游戏然后tasklist看pid，再netstat查看对应的tcp连接，对比进服和没进服的连接，推测出了IP地址</p><p><img src="/2021/09/12/MINCRACK/Blog\source_posts\MINCRACK\image-20210911234710682.png" alt="image-20210911234710682"></p><p>将游戏地址改成这个IP和端口，成功进入</p><p>然后我尝试找出为什么会导致查不到ip的原因，最终在油管上找到了一个反查ip的视频，他说了目标服务器用了SRV解析隐藏了真实域名，不过他直接ping出来ip地址（伪的）了，我尝试用相同的方法，成功获取到域名，并得到和刚才一样的ip。</p><p><img src="/2021/09/12/MINCRACK/Blog\source_posts\MINCRACK\image-20210911235620088.png" alt="image-20210911235620088"></p><p>把服务器地址改为出来的mcxx.xxx.cn，结果被断了，应该是服务器没有做这个域名的解析导致的!<img src="/2021/09/12/MINCRACK/Blog\source_posts\MINCRACK\image-20210911232532116.png" alt="image-20210911232532116"></p><p>至此，我们已经得到了目标服务器的IP地址，但是针对其的资产收集还有各种测试还有待完成，就暂且先做到这，等以后有空再继续进行渗透。</p><h2 id="未完待续"><a href="#未完待续" class="headerlink" title="未完待续"></a>未完待续</h2><hr>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> 委托 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
   
   
 </search>
