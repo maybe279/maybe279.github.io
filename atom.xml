@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>擦皮的博客</title>
+  
+  
+  <link href="http://example.com/atom.xml" rel="self"/>
+  
+  <link href="http://example.com/"/>
+  <updated>2021-09-11T14:27:49.289Z</updated>
+  <id>http://example.com/</id>
+  
+  <author>
+    <name>擦皮</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title></title>
+    <link href="http://example.com/2021/09/11/%E5%88%9D%E6%8E%A2%E6%B8%97%E9%80%8FMinecraft%E5%85%AC%E6%9C%8D/"/>
+    <id>http://example.com/2021/09/11/%E5%88%9D%E6%8E%A2%E6%B8%97%E9%80%8FMinecraft%E5%85%AC%E6%9C%8D/</id>
+    <published>2021-09-11T14:27:49.289Z</published>
+    <updated>2021-09-11T14:27:49.289Z</updated>
+    
+    
+    
+    
+    
+  </entry>
+  
+</feed>
