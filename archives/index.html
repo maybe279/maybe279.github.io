@@ -7,12 +7,12 @@
   <meta name="description" content="擦皮的博客">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta property="og:type" content="website">
-<meta property="og:title" content="分类">
-<meta property="og:url" content="https://swertluck.vip/categories/index.html">
+<meta property="og:title" content="关于">
+<meta property="og:url" content="https://swertluck.vip/about/index.html">
 <meta property="og:site_name" content="擦皮的博客">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-09-01T00:00:00.000Z">
-<meta property="article:modified_time" content="2021-09-10T17:33:54.136Z">
+<meta property="article:modified_time" content="2021-09-10T17:34:11.993Z">
 <meta property="article:author" content="擦皮">
 <meta name="twitter:card" content="summary">
 
@@ -468,36 +468,4 @@
 
 
 
-
-<div id="musicMouseDrag" style="position:fixed; z-index: 9999; bottom: 0; right: 0;">
-    <div id="musicDragArea" style="position: absolute; top: 0; left: 0; width: 100%;height: 10px;cursor: move; z-index: 10;"></div>
-    <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=280 height=52 src="//music.163.com/outchain/player?type=2&id=27499145&auto=1&height=32"></iframe>
-</div>
-<script>
-    var $DOC = $(document)
-    $('#musicMouseDrag').on('mousedown', function (e) {
-      // 阻止文本选中
-      $DOC.bind("selectstart", function () {
-        return false;
-      });
-      $('#musicDragArea').css('height', '100%');
-      var $moveTarget = $('#musicMouseDrag');
-      $moveTarget.css('border', '1px dashed grey')
-      var div_x = e.pageX - $moveTarget.offset().left;
-      var div_y = e.pageY - $moveTarget.offset().top;
-      $DOC.on('mousemove', function (e) {
-        var targetX = e.pageX - div_x;
-        var targetY = e.pageY - div_y;
-        targetX = targetX < 0 ? 0 : (targetX + $moveTarget.outerWidth() >= window.innerWidth) ? window.innerWidth - $moveTarget.outerWidth() : targetX;
-        targetY = targetY < 0 ? 0 : (targetY + $moveTarget.outerHeight() >= window.innerHeight) ? window.innerHeight - $moveTarget.outerHeight() : targetY;
-        $moveTarget.css({'left': targetX + 'px', 'top': targetY + 'px', 'bottom': 'inherit', 'right': 'inherit'})
-      }).on('mouseup', function () {
-        $DOC.unbind("selectstart");
-        $DOC.off('mousemove')
-        $DOC.off('mouseup')
-        $moveTarget.css('border', 'none')
-        $('#musicDragArea').css('height', '10px');
-      })
-    })
-</script>
 </html>
