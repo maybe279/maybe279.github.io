@@ -3,11 +3,11 @@
   <title>擦皮的博客</title>
   
   
-  <link href="http://example.com/atom.xml" rel="self"/>
+  <link href="https://swertluck.vip/atom.xml" rel="self"/>
   
-  <link href="http://example.com/"/>
+  <link href="https://swertluck.vip/"/>
   <updated>2021-09-12T05:14:04.929Z</updated>
-  <id>http://example.com/</id>
+  <id>https://swertluck.vip/</id>
   
   <author>
     <name>擦皮</name>
@@ -18,8 +18,8 @@
   
   <entry>
     <title>MINECRACK</title>
-    <link href="http://example.com/2021/09/12/MINCRACK/"/>
-    <id>http://example.com/2021/09/12/MINCRACK/</id>
+    <link href="https://swertluck.vip/2021/09/12/MINCRACK/"/>
+    <id>https://swertluck.vip/2021/09/12/MINCRACK/</id>
     <published>2021-09-11T16:11:12.958Z</published>
     <updated>2021-09-12T05:14:04.929Z</updated>
     
@@ -35,7 +35,7 @@
     
     
     
-    <category term="委托" scheme="http://example.com/tags/%E5%A7%94%E6%89%98/"/>
+    <category term="委托" scheme="https://swertluck.vip/tags/%E5%A7%94%E6%89%98/"/>
     
   </entry>
   
