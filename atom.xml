@@ -6,7 +6,7 @@
   <link href="https://swertluck.vip/atom.xml" rel="self"/>
   
   <link href="https://swertluck.vip/"/>
-  <updated>2021-09-12T13:05:51.257Z</updated>
+  <updated>2021-09-14T13:54:52.260Z</updated>
   <id>https://swertluck.vip/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>OAS破解及V2代理拨号</title>
+    <link href="https://swertluck.vip/posts/zxvzqiqi/"/>
+    <id>https://swertluck.vip/posts/zxvzqiqi/</id>
+    <published>2021-09-14T12:27:40.724Z</published>
+    <updated>2021-09-14T13:54:52.260Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><blockquote><ul><li><a href="https://www.starduster.me/2019/12/19/talk-about-egg-file-and-hacking-ovpnas/">https://www.starduster.me/2019/12/19/talk-about-egg-file-and-hacking-ovpnas/</a></li><li><a href="https://6xyun.cn/article/112">https://6xyun.cn/article/112</a></li><li><a href="https://www.wangfeng.live/2020/11/centos7-openvpn-access-server-installation-latest-version/">https://www.wangfeng.live/2020/11/centos7-openvpn-access-server-installation-latest-version/</a></li><li><a href="http://www.sycmd.com/post-368.html">http://www.sycmd.com/post-368.html</a></li></ul></blockquote><h2 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h2><p>某位老朋友因为校园网的关系v2突然无效了，想帮他使用强力点的方法，本想用OAS开多账户，结果发现OAS在未有license情况下最多就2个账户，于是就开始想办法破解OAS，同时发现V2失效是因为拨号上网的原因，就一并解决了。</p><h2 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h2><p>首先是去尝试破解最新版的OAS，获取pyovpn-2.0-py3.8.egg</p><p><img src="/posts/zxvzqiqi/1.png"></p><p>随后将其中的uprop.pyc更改为uprop2.pyc，再新建一个uprop.py，写入代码</p><pre><code class="python">from pyovpn.lic import uprop2old_figure = Nonedef new_figure(self, licdict):    ret = old_figure(self, licdict)    ret[&#39;concurrent_connections&#39;] = 1024    return retfor x in dir(uprop2):    if x[:2] == &#39;__&#39;:        continue    if x == &#39;UsageProperties&#39;:        exec(&#39;old_figure = uprop2.UsageProperties.figure&#39;)        exec(&#39;uprop2.UsageProperties.figure = new_figure&#39;)    exec(&#39;%s = uprop2.%s&#39; % (x, x))</code></pre><p>然后将其编译为库文件，并更名为uprop.pyc，python版本3.7</p><pre><code class="shell">python3 -O -m compileall uprop.py &amp;&amp; mv __pycache__/uprop.cpython-37.opt-1.pyc uprop.pyc</code></pre><p>原理似乎是将原来的pyc文件改名，然后用新的替代并重新劫持原来的pyc</p><p>最后将uprop.pyc与uprop2.pyc放入egg文件，最后传回服务器重启服务</p><p><img src="/posts/zxvzqiqi/2.png"></p><p>无奈失败，不知道是什么原因，试了很多次都不行，有朋友成功的可以联系我。</p><p>尝试第二种方法</p><h2 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h2><p>这种方法对低版本有效，新版本不行</p><p>我用的是2.5.2的oas</p><p>安装</p><pre><code class="sh">yum -y install https://as-repository.openvpn.net/as-repo-centos7.rpmyum -y install openvpn-as</code></pre><p>可以直接线上下包装也可以手动下载包装</p><pre><code class="sh">rpm -ivh openvpn-as-2.5.2-CentOSrelease.x86_64.rpm</code></pre><p>装完改密码</p><pre><code class="sh">passwd openvpn</code></pre><p>然后破解，和上面的一样，不过是修改一下uprop.py的内容改成</p><pre><code class="python">import uprop2old_figure = Nonedef new_figure(self, licdict):    ret = old_figure(self, licdict)    ret[&#39;concurrent_connections&#39;] = 1024    return retfor x in dir(uprop2):    if x[:2] == &#39;__&#39;:        continue    if x == &#39;UsageProperties&#39;:        exec &#39;old_figure = uprop2.UsageProperties.figure&#39;        exec &#39;uprop2.UsageProperties.figure = new_figure&#39;    exec &#39;%s = uprop2.%s&#39; % (x, x)</code></pre><p>然后同样的流程，破解文件是在/usr/local/openvpn_as/lib/python2.7/site-packages/目录下，然后覆盖</p><p>再进入/usr/local/openvpn_as/bin目录，执行./_ovpn-init</p><pre><code class="sh">./_ovpn-init</code></pre><p>报错就注释掉，然后一路默认就行</p><p>重新登控制台</p><p><img src="/posts/zxvzqiqi/3.png"></p><p>现在支持1024个设备同时连接了，非常好。</p><blockquote><p>github上有脚本也可以直接破解</p><ul><li><a href="https://github.com/Nirob3x/OpenVPN-As-Unlimited">https://github.com/Nirob3x/OpenVPN-As-Unlimited</a></li></ul></blockquote><h2 id="解决V2突然失效问题"><a href="#解决V2突然失效问题" class="headerlink" title="解决V2突然失效问题"></a>解决V2突然失效问题</h2><p>发现是由于朋友的校园网是拨号上网导致的，v2不会自动代理拨号，于是参考了网上的解决方式</p><p>将拨号上网的名称改成英文，然后再把下面的自动代理设置上就解决了。</p><h2 id="主线"><a href="#主线" class="headerlink" title="主线"></a>主线</h2><blockquote><p>【今天看到九世发新文关于CVE-2021-40444的复现，还发现了ProcessMonitor这个玩意，无奈我对软件安全层面的知识匮乏，还有很多需要学习，本来今天计划是学习这个漏洞拓展知识面，后来被打乱了，不过后续可以补上】</p><p>【自己写python往Pocsuite里面添轮子】</p><p>【搭建vulhub，学习主流漏洞利用手法】</p><p>【批量采集目标，去实战，对市面上主流的各类框架、cms越来越熟悉，对可能存在的漏洞越来越敏锐，学习免杀还有bypass的技巧】</p><p>【对软件方面的安全越来越感兴趣了，想学习下C#】</p><p>【系统学习一下内网渗透，玩一下无线渗透】</p></blockquote><h2 id="支线"><a href="#支线" class="headerlink" title="支线"></a>支线</h2><blockquote><p>【一些乱七八糟的东西还有委托，比如：MINECRACK，之前对主站的前台挖了下，没发现逻辑漏洞，不知道后台有没有，如果不存在的话就难搞了，或许可以想办法做个外挂来曲线救国，不过我现在对外挂还有MC都不太在行，估计要拖一拖了】</p></blockquote>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;参考资料&quot;&gt;&lt;a href=&quot;#参考资料&quot; class=&quot;headerlink&quot; title=&quot;参考资料&quot;&gt;&lt;/a&gt;参考资料&lt;/h2&gt;&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://www.starduster.me/2019/12/</summary>
+      
+    
+    
+    
+    
+    <category term="破解" scheme="https://swertluck.vip/tags/%E7%A0%B4%E8%A7%A3/"/>
+    
+  </entry>
   
   <entry>
     <title>MINECRACK（第二章）</title>
@@ -44,7 +68,7 @@
     <link href="https://swertluck.vip/posts/12danfl2w/"/>
     <id>https://swertluck.vip/posts/12danfl2w/</id>
     <published>2021-09-11T16:11:12.958Z</published>
-    <updated>2021-09-12T13:05:32.024Z</updated>
+    <updated>2021-09-14T12:44:59.950Z</updated>
     
     <content type="html"><![CDATA[<h2 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h2><p>针对一个MC正版服，有百人规模，受好友委托想要让其游戏角色获得op权限，不进行任何破坏性举动，腐竹亦是好友的好友。</p><hr><p>我也不想打码了，就把过程完完整整放出来吧啊(～￣▽￣)～</p><hr><h2 id="MC开服方法"><a href="#MC开服方法" class="headerlink" title="MC开服方法"></a>MC开服方法</h2><ol><li>本地搭建然后内网穿透</li><li>购买vps搭建</li><li>第三方面板服</li><li>Realms</li></ol><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><ol><li>如果对方存在面板，可以尝试进面板然后加附带后门的插件</li><li>如果存在其他服务如ssh，ftp或者有网站、开放数据库等，进行测试看看能不能进去</li><li>进行资产收集看看其他目标有没有突破口</li><li>C段测试其他目标弱点，看看是不是处于一个内网</li><li>社会工程学，想办法让服主说出面板密码（如果存在），或者让他装上带后门的插件</li></ol><h2 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h2><p>首先做信息收集，已知其游戏服务器进入的域名为 yicraft.xyz，打算查他的ip，先ping了目标，然后ping不通，尝试nslookup，发现挂了VPN的查的到，不挂查不到，同时发现这是个NS解析的域名，推测是绑了cdn，但是这又很不符合特征，绑了cdn也应该查的到，就非常的奇怪</p><p><img src="/posts/12danfl2w/image-20210911233239293.png"></p><p><img src="/posts/12danfl2w/image-20210911233158538.png"></p><p>尝试直接进游戏然后tasklist看pid，再netstat查看对应的tcp连接，对比进服和没进服的连接，推测出了IP地址</p><ul><li>222.187.254.89:30890</li></ul><p><img src="/posts/12danfl2w/image-20210911234710682.png"></p><p>将游戏地址改成这个IP和端口，成功进入</p><p><img src="/posts/12danfl2w/image-20210912134221703.png"></p><p><img src="/posts/12danfl2w/image-20210912134329865.png"></p><p>然后我尝试找出为什么会导致查不到ip的原因，最终在油管上找到了一个反查ip的视频，他说了目标服务器用了SRV解析隐藏了真实域名，不过他直接ping出来ip地址（伪的）了，我尝试用相同的方法，成功获取到域名，还得到和刚才一样的ip以及新域名</p><ul><li>mc33.starmc.cn</li><li>e5-a14-auto.7skyun.com</li></ul><ul><li><a href="https://www.youtube.com/watch?v=DJnXztiyAmI">https://www.youtube.com/watch?v=DJnXztiyAmI</a></li></ul><p><img src="/posts/12danfl2w/image-20210911235620088.png"></p><p>把服务器地址改为出来的mc33.starmc.cn进入，结果被断了，应该是服务器没有对这个域名提供服务</p><p><img src="/posts/12danfl2w/image-20210911234134836.png"></p><p><img src="/posts/12danfl2w/image-20210911232532116.png"></p><p>至此，我们已经得到了目标服务器的IP地址，但是针对其的资产收集还有各种测试还有待完成，就暂且先做到这，等以后有空再继续进行渗透。</p><blockquote><p>[服务器IP] 222.187.254.89:30890</p><p>[真实域名] mc33.starmc.cn</p><p>[伪装域名] yicraft.xyz</p><p>[未知] e5-a14-auto.7skyun.com</p></blockquote><h2 id="未完待续"><a href="#未完待续" class="headerlink" title="未完待续"></a>未完待续</h2><hr>]]></content>
     
