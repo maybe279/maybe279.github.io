@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>ABLOG</title>
+  <title>HackLog</title>
   
   
   <link href="https://swertluck.vip/atom.xml" rel="self"/>
@@ -10,7 +10,7 @@
   <id>https://swertluck.vip/</id>
   
   <author>
-    <name>擦皮</name>
+    <name>Z3rg</name>
     
   </author>
   
