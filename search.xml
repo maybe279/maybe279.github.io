@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>记一次Docker试水</title>
+      <link href="/posts/12341lkaf/"/>
+      <url>/posts/12341lkaf/</url>
+      
+        <content type="html"><![CDATA[<h2 id="过程"><a href="#过程" class="headerlink" title="过程"></a>过程</h2><p>容器是非常强大的一项发明，他解决了过去许多环境配置非常冗杂的问题。</p><p>很久之前就已经听说docker了，但是一直没去用过，今天想把这个坑给填上，于是乎就开始实验了。</p><p>首先直接是装一个docker-desktop，由于不想开虚拟机再配置虚拟环境，这样对电脑的性能会有影响，所以是在windows上面配置。打开docker之后上来的问题就是说报错wsl 2未配置。</p><p><img src="/posts/12341lkaf/2.png"></p><p>这下就有来头了，这wsl2装好之后，发现这是个非常强大功能，直接在windows上运行了linux环境。</p><p><img src="/posts/12341lkaf/1.png"></p><p>但由于默认是在C盘下，C盘有限的空间不能装太多东西，于是就将其导出，然后换个盘重新导入</p><pre><code class="sh">wsl --list -v    #查看当前环境的列表wsl --export xxx x:/xxx.tar    #导出wsl --unregister xxx    #将原来的卸载wsl --import xxx x:/xxx x:/xxx.tar --version 2 #导入xxx config --default-user xxx #重新配置一下原来的默认账户，否则默认是root</code></pre><p>然后启动docker发现还是报错，这时候应该是我们wsl版本低了，去安装个升级版本就行了。</p><hr><p>搞好后就可以开始搞docker了</p><p>以一个古老的kms镜像举例</p><p>拿到一个dockerfile</p><pre><code class="sh">docker build -t kms:v1 .    #先build一个镜像dokcer run -i -p 1688:1688 kms:v1    #启动kms:v1的container，容器端口映射到了本机的1688</code></pre><p><img src="/posts/12341lkaf/3.png"></p><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>这样一来container就起来了，docker-desktop还带有图像化界面可以操作，像vulhub这种有compose的，配置文件是yml，可以利用docker-compose up/down 来执行。</p><p>这次经验直接解决了windows下渗透机的问题，比如searchsploit或者其他工具，这样一来，渗透效率会提高许多，试想一下，把vulhub，宝塔，phpstudy，docker各种环境揉起来，甚至可以直接一套机子整套环境，再加上个rolan，不知道效率会不会起飞呢。不过最好还是分几个虚拟机比较好，safety first。</p><hr><blockquote><ul><li><p>最近在学习些操作系统机制，从舟长那里学到了不少，那些病毒也很有魅力，打算以后往红队发展了，算是转正吧。发现踏实研究的要比现在网上那些华而不实的人好太多，奇技淫巧拿来吹牛b或者自娱自乐还不错，但终究还是虚的，今后像TOM这样的可能只会越来越多，趋势如此。</p></li><li><p>今天看企鹅发了篇信息收集的专栏，觉得挺不错，打算再做一此信息收集的概要，并不会完全覆盖到，毕竟这一面太广，先把企鹅的那些给做掉。</p></li></ul></blockquote>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> 环境 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>CVE-2021-40444</title>
       <link href="/posts/lsqwreoxckl/"/>
       <url>/posts/lsqwreoxckl/</url>
