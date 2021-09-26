@@ -2016,11 +2016,6 @@ img.pswp__img {
   .shang_box .shang_payimg .pay_img img {
     width: 200px;
   }
-  .shang_box.ufo002 {
-    margin: auto 0 auto 8px;
-    display: block;
-    float: right;
-  }
 }
 @media screen and (max-width: 322px) {
   .nav-right form .search {
@@ -2055,7 +2050,7 @@ font-size
   .shang_box .shang_payimg .pay_img {
     width: 324px;
   }
-  .shang_box .shang_payimg .pay_img.weixin_img {
+  .shang_box .shang_payimg .pay_img.ufo002_img {
     margin-left: -174px;
   }
   .shang_box .shang_payimg .pay_img img {
