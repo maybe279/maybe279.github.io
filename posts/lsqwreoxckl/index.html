@@ -40,8 +40,6 @@
 
 
 
-<script src="//cdn.jsdelivr.net/npm/jquery.cookie@1.4.1/jquery.cookie.min.js" ></script>
-
 <script src="/js/iconfont.js?v=1.1.0" ></script>
 
 <meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="HackLog" type="application/atom+xml">
@@ -139,6 +137,8 @@
 
 
 
+    <a class="more-menus">更多菜单</a>
+
 
 <ul>
     <li>
@@ -154,9 +154,20 @@
     <div class="menus">
         
             
+                <a class="dynamic-menu site_url"
+                   
+                   href="/photo">相册</a>
+        
     </div>
     <div>
         
+            <a class="about  hasFriend  site_url"
+               
+               href="/about">关于</a>
+        
+        <a style="width: 50%"
+                
+                                           class="friends">友链</a>
         
     </div>
 </div>
@@ -426,10 +437,14 @@ BOOL WINAPI DllMain(
 
 
       
-       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。 </span>
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达，点赞有惊喜。 </span>
     </div>
 </article>
 
+
+<p>
+    <a  class="dashang" onclick="dashangToggle()">赞</a>
+</p>
 
 
 <div class="article_copyright">
@@ -455,18 +470,42 @@ BOOL WINAPI DllMain(
 
     </div>
     <div class="copyright">
-        <p class="footer-entry">
-    ©2021 Z3rg
+        <p class="footer-entry"><span class="miit">
+                <img src="/img/zergss.gif" title="hacking">
+                <a href="https://swertluck.vip"></a>
+        </span>
+    
 </p>
-<p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
+<p class="footer-entry">
+    ©author:Z3rg
+</p>
+<p class="footer-entry">星星之火 可以燎原</p>
 
     </div>
     <div class="full-toc">
         <button class="full" data-title="切换全屏"><span class="min "></span></button>
-<a class="" id="rocket" ></a>
+
 
     </div>
 </div>
+
+<div class="hide_box" onclick="dashangToggle()"></div>
+<div class="shang_box">
+    <a class="shang_close"  onclick="dashangToggle()">×</a>
+    <div class="shang_tit">
+        <p>Discord扫码加群，一起来玩吧 [翻墙]</p>
+    </div>
+    <div class="shang_payimg">
+        <div class="pay_img">
+            <img src="/img/discord.png" class="ufo001" title="感谢支持">
+            <img src="/img/dis2.png" class="ufo002" title="感谢支持">
+        </div>
+    </div>
+    <div class="shang_payselect">
+        <span><label><input type="radio" name="ufo" checked value="ufo001">二维码</label></span><span><label><input type="radio" name="ufo" value="ufo002">链接</label></span>
+    </div>
+</div>
+
 
 <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/hibiki.model.json"},"display":{"position":"right","width":250,"height":600},"mobile":{"show":false,"scale":0.4,"position":"right"},"react":{"opacity":0.7},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 <script src="/js/jquery.pjax.js?v=1.1.0" ></script>
@@ -484,6 +523,14 @@ BOOL WINAPI DllMain(
         
 
         /*渲染打赏样式*/
+        
+        $("input[name=ufo]").on("click", function () {
+            if($("input[name=ufo]:checked").val()=="ufo002"){
+                $(".shang_box .shang_payimg .pay_img").addClass("ufo002_img");
+            } else {
+                $(".shang_box .shang_payimg .pay_img").removeClass("ufo002_img");
+            }
+        })
         
 
         /*高亮代码块行号*/
@@ -751,6 +798,11 @@ BOOL WINAPI DllMain(
 
     /*打赏页面隐藏与展示*/
     
+    function dashangToggle() {
+        $(".shang_box").fadeToggle();
+        $(".hide_box").fadeToggle();
+    }
+    
 
 </script>
 
@@ -830,7 +882,7 @@ BOOL WINAPI DllMain(
     /* 背景图样式 */
     
     #post {
-        background: url(/img/mao.jpg);
+        background: url(/img/sssssss.jpg);
     }
     
     
@@ -850,7 +902,7 @@ BOOL WINAPI DllMain(
         width: 100%;
         height: 100%;
         opacity: 0.3;
-        background: url("https://i.loli.net/2019/07/22/5d3521411f3f169375.png");
+        background: url("/img/ceche.gif");
         background-repeat: no-repeat;
         background-position: 50% 0;
         -ms-background-size: cover;
@@ -929,6 +981,17 @@ BOOL WINAPI DllMain(
 
 
 
+
+
+<div class="mobile-menus-out" >
+
+</div>
+<div class="mobile-menus">
+    
+    
+    <a class="dynamic-menu site_url"   href="/photo">相册</a>
+    
+</div>
 
 
 </html>

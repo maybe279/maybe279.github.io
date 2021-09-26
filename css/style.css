@@ -73,7 +73,7 @@
   text-align: center;
   line-height: 66px;
   color: #fff;
-  font-size: 30px;
+  font-size: 22px;
   margin-top: 7px;
   margin-right: 2px;
 }
@@ -92,13 +92,13 @@
   vertical-align: middle;
   transition: margin-left 0.5s;
 }
-.shang_box .shang_payimg .pay_img.weixin_img {
+.shang_box .shang_payimg .pay_img.ufo002_img {
   margin-left: -280px;
 }
 .shang_box .shang_payimg .pay_img img {
   width: 255px;
 }
-.shang_box .shang_payimg .pay_img img.weixin {
+.shang_box .shang_payimg .pay_img img.ufo002 {
   margin: auto 0 auto 16px;
   display: block;
   float: right;
@@ -1183,7 +1183,7 @@
   font-weight: 400;
   font-size: 16px;
   line-height: 1.75;
-  background: #f4f5f5;
+  background: #fff;
   overflow-x: hidden;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
@@ -1542,7 +1542,7 @@
   font-size: 20px;
   color: #fff;
   border: none;
-  background: #4094c7;
+  background: #ff4500;
   -webkit-border-radius: 50%;
   border-radius: 50%;
   text-align: center;
@@ -1554,18 +1554,18 @@
   transition: 0.4s ease-in-out;
 }
 #post .copyright {
-  margin-top: 50px;
+  margin-top: 60px;
   padding-bottom: 30px;
   line-height: 14px;
   text-align: center;
-  color: #bcc1c4;
+  color: #828282;
 }
 #post .copyright .miit {
   display: inline-block;
-  padding-right: 10px;
+  padding-right: 0px;
 }
 #post .copyright .miit img {
-  height: 15px;
+  height: 100px;
 }
 #post .copyright a {
   color: #0269c8;
@@ -1577,8 +1577,8 @@
 }
 #post .article_copyright {
   padding: 5px 30px;
-  margin-bottom: 20px;
-  background-color: #83b3c1;
+  margin-top: 60px;
+  background-color: #eecbad;
   border-radius: 8px;
   font-weight: 700;
   line-height: 22px;
