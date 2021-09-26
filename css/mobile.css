@@ -263,6 +263,11 @@
   .shang_box .shang_payimg .pay_img img {
     width: 200px;
   }
+  .shang_box.ufo002 {
+    margin: auto 0 auto 16px;
+    display: block;
+    float: right;
+  }
 }
 @media screen and (max-width: 322px) {
   .nav-right form .search {
