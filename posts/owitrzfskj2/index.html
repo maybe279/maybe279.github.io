@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>MINECRACK（第一章） | HackLog</title>
-  <meta name="keywords" content=" 委托 ">
-  <meta name="description" content="MINECRACK（第一章） | HackLog">
+  <title>DVR类摄像头入侵 | HackLog</title>
+  <meta name="keywords" content=" 实验 ">
+  <meta name="description" content="DVR类摄像头入侵 | HackLog">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta property="og:type" content="website">
 <meta property="og:title" content="关于">
@@ -314,9 +314,9 @@
 </aside>
 <div id="post">
     <div class="pjax">
-        <article id="post-1.MINCRACK" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-7-camera" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">MINECRACK（第一章）</h1>
+        <h1 class="article-title">DVR类摄像头入侵</h1>
     
     <div class="article-meta">
         
@@ -326,19 +326,19 @@
         <span class="tag">
             <i class="iconfont icon-tag"></i>
             
-            <a class="color3">委托</a>
+            <a class="color3">实验</a>
             
         </span>
         
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2021-09-27 01:04:35'>2021-09-12 00:11</time>
+            发布时间 : <time class="date" title='最后更新: 2021-10-01 23:41:39'>2021-10-01 23:08</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:640</span>
+        <span>字数:505</span>
         
         
         
@@ -346,7 +346,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9B%AE%E6%A0%87"><span class="toc-text">目标</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MC%E5%BC%80%E6%9C%8D%E6%96%B9%E6%B3%95"><span class="toc-text">MC开服方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%9D%E8%B7%AF"><span class="toc-text">思路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86"><span class="toc-text">信息收集</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">未完待续</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9B%BD%E5%BA%86%E8%8A%82%E5%BF%AB%E4%B9%90"><span class="toc-text">国庆节快乐</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B5%B7%E5%9B%A0"><span class="toc-text">起因</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%87%E7%A8%8B"><span class="toc-text">过程</span></a></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -362,53 +362,21 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h2><p>针对一个MC正版服，有百人规模，受好友委托想要让其游戏角色获得op权限，不进行任何破坏性举动，腐竹亦是好友的好友。</p>
-<p>我也懒得打码了，就把过程完完整整放出来吧啊(～￣▽￣)～</p>
-<h2 id="MC开服方法"><a href="#MC开服方法" class="headerlink" title="MC开服方法"></a>MC开服方法</h2><ol>
-<li>本地搭建然后内网穿透</li>
-<li>购买vps搭建</li>
-<li>第三方面板服</li>
-<li>Realms</li>
-</ol>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><ol>
-<li>如果对方存在面板，可以尝试进面板然后加附带后门的插件</li>
-<li>如果存在其他服务如ssh，ftp或者有网站、开放数据库等，进行测试看看能不能进去</li>
-<li>进行资产收集看看其他目标有没有突破口</li>
-<li>C段测试其他目标弱点，看看是不是处于一个内网</li>
-<li>社会工程学，想办法让服主说出面板密码（如果存在），或者让他装上带后门的插件</li>
-</ol>
-<h2 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h2><p>首先做信息收集，已知其游戏服务器进入的域名为 yicraft.xyz，打算查他的ip，先ping了目标，然后ping不通，尝试nslookup，发现挂了VPN的查的到，不挂查不到，同时发现这是个NS解析的域名，推测是绑了cdn，但是这又很不符合特征，绑了cdn也应该查的到，就非常的奇怪</p>
-<p><img src="/posts/12danfl2w/image-20210911233239293.png"></p>
-<p><img src="/posts/12danfl2w/image-20210911233158538.png"></p>
-<p>尝试直接进游戏然后tasklist看pid，再netstat查看对应的tcp连接，对比进服和没进服的连接，推测出了IP地址</p>
+        <h1 id="国庆节快乐"><a href="#国庆节快乐" class="headerlink" title="国庆节快乐"></a><center>国庆节快乐</center></h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>请遵守法律，不要涉及违法犯罪</p>
+<h2 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h2><p>最近企鹅发了一篇文章，就前一阵子有人发布了一个针对DVR类摄像头的漏洞利用工具，里面集合了数个exploit，由于DVR是一种非常流行且广泛应用的技术，像安保以及各种监控地段都有不少是DVR，如果这个工具其中集成的漏洞可以泛用那就很厉害了，于是打算做一个这个工具的试验，项目地址在github上也有了。</p>
 <ul>
-<li>222.187.254.89:30890</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/maybe279/CamRaptor">https://github.com/maybe279/CamRaptor</a></li>
 </ul>
-<p><img src="/posts/12danfl2w/image-20210911234710682.png"></p>
-<p>将游戏地址改成这个IP和端口，成功进入</p>
-<p><img src="/posts/12danfl2w/image-20210912134221703.png"></p>
-<p><img src="/posts/12danfl2w/image-20210912134329865.png"></p>
-<p>然后我尝试找出为什么会导致查不到ip的原因，最终在油管上找到了一个反查ip的视频，他说了目标服务器用了SRV解析隐藏了真实域名，不过他直接ping出来ip地址（伪的）了，我尝试用相同的方法，成功获取到域名，还得到和刚才一样的ip以及新域名</p>
-<ul>
-<li>mc33.starmc.cn</li>
-<li>e5-a14-auto.7skyun.com</li>
-</ul>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=DJnXztiyAmI">https://www.youtube.com/watch?v=DJnXztiyAmI</a></li>
-</ul>
-<p><img src="/posts/12danfl2w/image-20210911235620088.png"></p>
-<p>把服务器地址改为出来的mc33.starmc.cn进入，结果被断了，应该是服务器没有对这个域名提供服务</p>
-<p><img src="/posts/12danfl2w/image-20210911234134836.png"></p>
-<p><img src="/posts/12danfl2w/image-20210911232532116.png"></p>
-<p>至此，我们已经得到了目标服务器的IP地址，但是针对其的资产收集还有各种测试还有待完成，就暂且先做到这，等以后有空再继续进行渗透。</p>
-<blockquote>
-<p>[服务器IP] 222.187.254.89:30890</p>
-<p>[真实域名] mc33.starmc.cn</p>
-<p>[伪装域名] yicraft.xyz</p>
-<p>[未知] e5-a14-auto.7skyun.com</p>
-</blockquote>
-<h3><center>未完待续</center></h3>
-
+<h2 id="过程"><a href="#过程" class="headerlink" title="过程"></a>过程</h2><p>首先是要采集目标，这个工具既然是针对DVR类，那我们就要找DVR类的产品，他简介说了有Novo，CeNova还有QSee等等，前两者的指纹不清楚，就暂以QSee来试验。就直接FOFA(之前试过网上那些找来的爬虫，都没自个写的快，所以建议是自己写，狼组的那个没试过不太清楚)开始采集目标</p>
+<p><img src="/posts/owitrzfskj2/1.png"></p>
+<p>然后把目标放到这个工具里面跑，结果跑出来结果很反常，什么都没有，这就很令人好奇了。</p>
+<p><img src="/posts/owitrzfskj2/2.png"></p>
+<p>看到他有支持调用API，再写几段代码，把代码跑起来，看看他的结果如何。</p>
+<p><img src="/posts/owitrzfskj2/3.png"></p>
+<p><img src="/posts/owitrzfskj2/4.png"></p>
+<p>挺离谱的，这个所谓集成exploit的勾八工具，200个目标一个都成不了，噱头倒是挺足，当然也可能是DVR一众产品都已经将漏洞修补了，还有其他的产品没有去测，具体情况我也懒得搞了。</p>
+<p><img src="/posts/owitrzfskj2/5.png">不管怎么说，这次试验的结果很明了了，所谓工具真的还是得去用自己研究出来的成果去进行开发，用别人的第一点时效性，第二点原理不明，最后安全性存疑。</p>
+<p>最近事情多，学习有些懈怠了，但安全方向我依旧是打算做下去的，以后也可能做正职，看情况。</p>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达，点赞有惊喜。 </span>
@@ -422,12 +390,12 @@
 
 
 <div class="article_copyright">
-    <p><span class="copy-title">文章标题:</span>MINECRACK（第一章）</p>
-    <p><span class="copy-title">字数:</span><span class="post-count">640</span></p>
+    <p><span class="copy-title">文章标题:</span>DVR类摄像头入侵</p>
+    <p><span class="copy-title">字数:</span><span class="post-count">505</span></p>
     <p><span class="copy-title">本文作者:</span><a  title="Z3rg">Z3rg</a></p>
-    <p><span class="copy-title">发布时间:</span>2021-09-12, 00:11:12</p>
-    <p><span class="copy-title">最后更新:</span>2021-09-27, 01:04:35</p>
-    <span class="copy-title">原始链接:</span><a class="post-url" href="/posts/12danfl2w/" title="MINECRACK（第一章）">https://swertluck.vip/posts/12danfl2w/</a>
+    <p><span class="copy-title">发布时间:</span>2021-10-01, 23:08:27</p>
+    <p><span class="copy-title">最后更新:</span>2021-10-01, 23:41:39</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/posts/owitrzfskj2/" title="DVR类摄像头入侵">https://swertluck.vip/posts/owitrzfskj2/</a>
     <p>
         <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">&#34;署名-非商用-相同方式共享 4.0&#34;</a> 转载请保留原文链接及作者。
     </p>
