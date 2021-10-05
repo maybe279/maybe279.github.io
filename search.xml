@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>信息收集-外网打点(1)</title>
+      <link href="/posts/qwtyjgxcbszsdg/"/>
+      <url>/posts/qwtyjgxcbszsdg/</url>
+      
+        <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>信息收集是非常重要的一环，收集到的信息越多，质量越高，就越能扩大攻击面，还可以针对目标制定战略。今天就以之前minecrack中的星域互联为例子，训练一下信息收集基本功。</p><h2 id="资产信息收集"><a href="#资产信息收集" class="headerlink" title="资产信息收集"></a>资产信息收集</h2><h3 id="whois"><a href="#whois" class="headerlink" title="whois"></a>whois</h3><p>查一下他域名的whois信息，网上有很多平台都可以查得到，这里就不多赘述了。</p><p>可以尝试查注册人，邮箱等联系方式，有的查不到，还可以看一下解析记录，数字证书，关联域名等等。</p><p><img src="/posts/qwtyjgxcbszsdg/5.png"></p><h3 id="资产"><a href="#资产" class="headerlink" title="资产"></a>资产</h3><p>可以调查一下有没有app，通过各种app查询平台，类似七麦。还有其他的资产，比如微信小程序，公众号，搜狗搜索微信，天眼查，企查查，爱企查等调查一下注册公司，注册的公众号等等。</p><h3 id="子域名"><a href="#子域名" class="headerlink" title="子域名"></a>子域名</h3><p>子域名的收集可以很大程度上拓展攻击面，常用的工具有类似挖掘机啊，各种平台啊等等，我选择用强大的oneforall解决，他能查询到的平台以及接口非常全面。</p><p>就先收集星域互联的子域。</p><p><img src="/posts/qwtyjgxcbszsdg/o2.png"></p><p><img src="/posts/qwtyjgxcbszsdg/e4.png"></p><p>发现了很多的子域，但是其中不少是直接被拦截不让访问的，也有不少是错误，我推测这些子域名就是用来给星域的机器挂域名的，之前查询到的关联域名也可以侧面证明了这一观点。</p><p>从中筛选出来存活目标，发现一个路由登录系统。</p><p><img src="/posts/qwtyjgxcbszsdg/a1.png"></p><p>尝试一下弱口令，并没有成功，可以在后续渗透过程中再针对这个目标。</p><h3 id="指纹"><a href="#指纹" class="headerlink" title="指纹"></a>指纹</h3><p><img src="/posts/qwtyjgxcbszsdg/z3.png"></p><p>有了目标之后，对其进行指纹识别，可以了解目标的cms，框架，web服务器，操作系统，什么语言等等信息。</p><p>由于个人搭建指纹库非常繁琐，并且吃力不讨好，需要时常更新策略，因此首选是通过各种平台接口进行对接，这边用的是bugscaner的api，然后写个程序调用api处理并输出结果保存到文本中。</p><h4 id="以上这些是信息收集的一部分内容，后续的内容抽空还会更新。"><a href="#以上这些是信息收集的一部分内容，后续的内容抽空还会更新。" class="headerlink" title="以上这些是信息收集的一部分内容，后续的内容抽空还会更新。"></a><center>以上这些是信息收集的一部分内容，后续的内容抽空还会更新。</center></h4>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> 信息收集 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>DVR类摄像头入侵</title>
       <link href="/posts/owitrzfskj2/"/>
       <url>/posts/owitrzfskj2/</url>

