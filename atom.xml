@@ -6,7 +6,7 @@
   <link href="https://swertluck.vip/atom.xml" rel="self"/>
   
   <link href="https://swertluck.vip/"/>
-  <updated>2021-10-05T15:42:13.428Z</updated>
+  <updated>2021-10-07T13:38:11.614Z</updated>
   <id>https://swertluck.vip/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>【杂技篇】AI克隆人声</title>
+    <link href="https://swertluck.vip/posts/uiregisaaasfq/"/>
+    <id>https://swertluck.vip/posts/uiregisaaasfq/</id>
+    <published>2021-10-07T12:49:30.557Z</published>
+    <updated>2021-10-07T13:38:11.614Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h2><p>听说前一阵子b站有个up的母亲被诈骗了5万，就是拜这玩意所赐。说个笑话，早在19年的时候，我就被这招给搞过。两年过去了，这种诈骗手段大曝光一回，挺无语的。</p><h2 id="过程"><a href="#过程" class="headerlink" title="过程"></a>过程</h2><p>第一次玩AI，用的github上面的AI语音项目，令人称奇的是，这个项目就是19年创建的，而我头一次被这玩意骗也是19年，可见这玩意起步已经是有2年历史的技术了。</p><ul><li><a href="https://github.com/CorentinJ/Real-Time-Voice-Cloning">https://github.com/CorentinJ/Real-Time-Voice-Cloning</a></li></ul><h4 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h4><p>主要是基于pytorch，ffmpeg，另外还需要N卡支持GPU编程的CUDA。</p><p>那就要python，或者anaconda，说起这anaconda就有点来头了，这玩意是个包管理器，但是和pip不同的是，可以创建虚拟环境，类似docker，包管类docker，不过我已经有python了就不用这个了。</p><h4 id="AI训练"><a href="#AI训练" class="headerlink" title="AI训练"></a>AI训练</h4><p>安装好环境之后，就需要训练AI，项目里有迅练用的train文件，然后配合找来的数据集，对数据集进行预处理，再进行训练，训练出来的模型再放到合成器文件夹中，也可以对vocoder进行训练，项目中有已经预训练好的模型，直接拉下来放好，就可以用了</p><h4 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h4><p>跑起来，将我们需要模拟的音频文件输入，再将我们需要让他说的话输入进去，就可以出来了，而这个项目不支持中文，只模拟英语。</p><p><img src="/posts/uiregisaaasfq/2.png"></p><h4 id="模拟中文"><a href="#模拟中文" class="headerlink" title="模拟中文"></a>模拟中文</h4><p>需要模拟中文，于是就用另外一个基于上面这个改进而来的中文语音项目</p><ul><li><a href="https://github.com/babysor/MockingBird/">https://github.com/babysor/MockingBird/</a></li></ul><p>配置好之后跑起来，来个冠希的语音，可以看到他是将字处理成拼音再根据拼音去模拟的，连第几声都有。</p><p><img src="/posts/uiregisaaasfq/1.png"></p><p>这个还支持web，但是实际测了发现web的还不如toolbox的，因为经常报错，而且录制和上传的文件有问题，有时候解析不出来，非常不好用，所以也不是很适合挂服务器调用。</p><p><img src="/posts/uiregisaaasfq/3.png"></p><h2 id="结果"><a href="#结果" class="headerlink" title="结果"></a>结果</h2><p>其实实战效果一般般，可能是数据集还不够多，调试起来也很废功夫。在语句短的时候效果还凑合，如果说用人的语音的话这招只能骗一骗不是很熟悉的人，或者就一短句一短句发。</p><p>这次就当作是反诈常识了。</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;起因&quot;&gt;&lt;a href=&quot;#起因&quot; class=&quot;headerlink&quot; title=&quot;起因&quot;&gt;&lt;/a&gt;起因&lt;/h2&gt;&lt;p&gt;听说前一阵子b站有个up的母亲被诈骗了5万，就是拜这玩意所赐。说个笑话，早在19年的时候，我就被这招给搞过。两年过去了，这种诈骗手段大曝光一</summary>
+      
+    
+    
+    
+    
+    <category term="杂技" scheme="https://swertluck.vip/tags/%E6%9D%82%E6%8A%80/"/>
+    
+  </entry>
   
   <entry>
     <title>信息收集-外网打点(1)</title>

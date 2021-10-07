@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>记一次Docker试水 | HackLog</title>
-  <meta name="keywords" content=" 环境 ">
-  <meta name="description" content="记一次Docker试水 | HackLog">
+  <title>【杂技篇】AI克隆人声 | HackLog</title>
+  <meta name="keywords" content=" 杂技 ">
+  <meta name="description" content="【杂技篇】AI克隆人声 | HackLog">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta property="og:type" content="website">
 <meta property="og:title" content="关于">
@@ -334,9 +334,9 @@
 </aside>
 <div id="post">
     <div class="pjax">
-        <article id="post-6-docker" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-9-aiyuyin" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">记一次Docker试水</h1>
+        <h1 class="article-title">【杂技篇】AI克隆人声</h1>
     
     <div class="article-meta">
         
@@ -346,19 +346,19 @@
         <span class="tag">
             <i class="iconfont icon-tag"></i>
             
-            <a class="color3">环境</a>
+            <a class="color3">杂技</a>
             
         </span>
         
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2021-09-25 22:09:23'>2021-09-25 21:06</time>
+            发布时间 : <time class="date" title='最后更新: 2021-10-07 21:38:11'>2021-10-07 20:49</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:696</span>
+        <span>字数:621</span>
         
         
         
@@ -366,7 +366,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%87%E7%A8%8B"><span class="toc-text">过程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-text">总结</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B5%B7%E5%9B%A0"><span class="toc-text">起因</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%87%E7%A8%8B"><span class="toc-text">过程</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA"><span class="toc-text">环境搭建</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#AI%E8%AE%AD%E7%BB%83"><span class="toc-text">AI训练</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%90%E8%A1%8C"><span class="toc-text">运行</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A8%A1%E6%8B%9F%E4%B8%AD%E6%96%87"><span class="toc-text">模拟中文</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%93%E6%9E%9C"><span class="toc-text">结果</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -382,39 +382,26 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="过程"><a href="#过程" class="headerlink" title="过程"></a>过程</h2><p>容器是非常强大的一项发明，他解决了过去许多环境配置非常冗杂的问题。</p>
-<p>很久之前就已经听说docker了，但是一直没去用过，今天想把这个坑给填上，于是乎就开始实验了。</p>
-<p>首先直接是装一个docker-desktop，由于不想开虚拟机再配置虚拟环境，这样对电脑的性能会有影响，所以是在windows上面配置。打开docker之后上来的问题就是说报错wsl 2未配置。</p>
-<p><img src="/posts/12341lkaf/2.png"></p>
-<p>这下就有来头了，这wsl2装好之后，发现这是个非常强大功能，直接在windows上运行了linux环境。</p>
-<p><img src="/posts/12341lkaf/1.png"></p>
-<p>但由于默认是在C盘下，C盘有限的空间不能装太多东西，于是就将其导出，然后换个盘重新导入</p>
-<pre><code class="sh">wsl --list -v    #查看当前环境的列表
-wsl --export xxx x:/xxx.tar    #导出
-wsl --unregister xxx    #将原来的卸载
-wsl --import xxx x:/xxx x:/xxx.tar --version 2 #导入
-xxx config --default-user xxx #重新配置一下原来的默认账户，否则默认是root
-</code></pre>
-<p>然后启动docker发现还是报错，这时候应该是我们wsl版本低了，去安装个升级版本就行了。</p>
-<hr>
-<p>搞好后就可以开始搞docker了</p>
-<p>以一个古老的kms镜像举例</p>
-<p>拿到一个dockerfile</p>
-<pre><code class="sh">docker build -t kms:v1 .    #先build一个镜像
-dokcer run -i -p 1688:1688 kms:v1    #启动kms:v1的container，容器端口映射到了本机的1688
-</code></pre>
-<p><img src="/posts/12341lkaf/3.png"></p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>这样一来container就起来了，docker-desktop还带有图像化界面可以操作，像vulhub这种有compose的，配置文件是yml，可以利用docker-compose up/down 来执行。</p>
-<p>这次经验直接解决了windows下渗透机的问题，比如searchsploit或者其他工具，这样一来，渗透效率会提高许多，试想一下，把vulhub，宝塔，phpstudy，docker各种环境揉起来，甚至可以直接一套机子整套环境，再加上个rolan，不知道效率会不会起飞呢。不过最好还是分几个虚拟机比较好，safety first。</p>
-<hr>
-<blockquote>
+        <h2 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h2><p>听说前一阵子b站有个up的母亲被诈骗了5万，就是拜这玩意所赐。说个笑话，早在19年的时候，我就被这招给搞过。两年过去了，这种诈骗手段大曝光一回，挺无语的。</p>
+<h2 id="过程"><a href="#过程" class="headerlink" title="过程"></a>过程</h2><p>第一次玩AI，用的github上面的AI语音项目，令人称奇的是，这个项目就是19年创建的，而我头一次被这玩意骗也是19年，可见这玩意起步已经是有2年历史的技术了。</p>
 <ul>
-<li><p>最近在学习些操作系统机制，从舟长那里学到了不少，那些病毒也很有魅力，打算以后往红队发展了，算是转正吧。发现踏实研究的要比现在网上那些华而不实的人好太多，奇技淫巧拿来吹牛b或者自娱自乐还不错，但终究还是虚的，今后像TOM这样的可能只会越来越多，趋势如此。</p>
-</li>
-<li><p>今天看企鹅发了篇信息收集的专栏，觉得挺不错，打算再做一此信息收集的概要，并不会完全覆盖到，毕竟这一面太广，先把企鹅的那些给做掉。</p>
-</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/CorentinJ/Real-Time-Voice-Cloning">https://github.com/CorentinJ/Real-Time-Voice-Cloning</a></li>
 </ul>
-</blockquote>
+<h4 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h4><p>主要是基于pytorch，ffmpeg，另外还需要N卡支持GPU编程的CUDA。</p>
+<p>那就要python，或者anaconda，说起这anaconda就有点来头了，这玩意是个包管理器，但是和pip不同的是，可以创建虚拟环境，类似docker，包管类docker，不过我已经有python了就不用这个了。</p>
+<h4 id="AI训练"><a href="#AI训练" class="headerlink" title="AI训练"></a>AI训练</h4><p>安装好环境之后，就需要训练AI，项目里有迅练用的train文件，然后配合找来的数据集，对数据集进行预处理，再进行训练，训练出来的模型再放到合成器文件夹中，也可以对vocoder进行训练，项目中有已经预训练好的模型，直接拉下来放好，就可以用了</p>
+<h4 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h4><p>跑起来，将我们需要模拟的音频文件输入，再将我们需要让他说的话输入进去，就可以出来了，而这个项目不支持中文，只模拟英语。</p>
+<p><img src="/posts/uiregisaaasfq/2.png"></p>
+<h4 id="模拟中文"><a href="#模拟中文" class="headerlink" title="模拟中文"></a>模拟中文</h4><p>需要模拟中文，于是就用另外一个基于上面这个改进而来的中文语音项目</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/babysor/MockingBird/">https://github.com/babysor/MockingBird/</a></li>
+</ul>
+<p>配置好之后跑起来，来个冠希的语音，可以看到他是将字处理成拼音再根据拼音去模拟的，连第几声都有。</p>
+<p><img src="/posts/uiregisaaasfq/1.png"></p>
+<p>这个还支持web，但是实际测了发现web的还不如toolbox的，因为经常报错，而且录制和上传的文件有问题，有时候解析不出来，非常不好用，所以也不是很适合挂服务器调用。</p>
+<p><img src="/posts/uiregisaaasfq/3.png"></p>
+<h2 id="结果"><a href="#结果" class="headerlink" title="结果"></a>结果</h2><p>其实实战效果一般般，可能是数据集还不够多，调试起来也很废功夫。在语句短的时候效果还凑合，如果说用人的语音的话这招只能骗一骗不是很熟悉的人，或者就一短句一短句发。</p>
+<p>这次就当作是反诈常识了。</p>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达，点赞有惊喜。 </span>
@@ -428,12 +415,12 @@ dokcer run -i -p 1688:1688 kms:v1    #启动kms:v1的container，容器端口映
 
 
 <div class="article_copyright">
-    <p><span class="copy-title">文章标题:</span>记一次Docker试水</p>
-    <p><span class="copy-title">字数:</span><span class="post-count">696</span></p>
+    <p><span class="copy-title">文章标题:</span>【杂技篇】AI克隆人声</p>
+    <p><span class="copy-title">字数:</span><span class="post-count">621</span></p>
     <p><span class="copy-title">本文作者:</span><a  title="Z3rg">Z3rg</a></p>
-    <p><span class="copy-title">发布时间:</span>2021-09-25, 21:06:39</p>
-    <p><span class="copy-title">最后更新:</span>2021-09-25, 22:09:23</p>
-    <span class="copy-title">原始链接:</span><a class="post-url" href="/posts/12341lkaf/" title="记一次Docker试水">https://swertluck.vip/posts/12341lkaf/</a>
+    <p><span class="copy-title">发布时间:</span>2021-10-07, 20:49:30</p>
+    <p><span class="copy-title">最后更新:</span>2021-10-07, 21:38:11</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/posts/uiregisaaasfq/" title="【杂技篇】AI克隆人声">https://swertluck.vip/posts/uiregisaaasfq/</a>
     <p>
         <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">&#34;署名-非商用-相同方式共享 4.0&#34;</a> 转载请保留原文链接及作者。
     </p>
