@@ -142,7 +142,7 @@
     <li>
         <div class="all active" data-rel="全部文章">全部文章
             
-                <small>(11)</small>
+                <small>(12)</small>
             
         </div>
     </li>
@@ -165,8 +165,8 @@
         
     </div>
 </div>
-<input type="hidden" id="yelog_site_posts_number" value="11">
-<input type="hidden" id="yelog_site_word_count" value="7.5k">
+<input type="hidden" id="yelog_site_posts_number" value="12">
+<input type="hidden" id="yelog_site_word_count" value="8.2k">
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
     <span id="busuanzi_value_site_pv"></span>
@@ -218,6 +218,10 @@
             </li>
         
             <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>免杀/bypass</a>
+            </li>
+        
+            <li class="article-tag-list-item">
                 <i class="iconfont icon-tag"></i><a>破解</a>
             </li>
         
@@ -251,6 +255,14 @@
 
     
     <nav id="title-list-nav">
+        
+        <a  class="全部文章 "
+           href="/posts/alsfawoeirqpldkg/"
+           data-tag="免杀/bypass"
+           data-author="" >
+            <span class="post-title" title="PHP免杀小马研究">PHP免杀小马研究</span>
+            <span class="post-date" title="2021-11-02 14:56:10">2021/11/02</span>
+        </a>
         
         <a  class="全部文章 "
            href="/posts/nektriulqqowri/"
@@ -406,10 +418,6 @@
 </article>
 
 
-<p>
-    <a  class="dashang" onclick="dashangToggle()">赞</a>
-</p>
-
 
 
 
@@ -441,24 +449,6 @@
     </div>
 </div>
 
-<div class="hide_box" onclick="dashangToggle()"></div>
-<div class="shang_box">
-    <a class="shang_close"  onclick="dashangToggle()">×</a>
-    <div class="shang_tit">
-        <p>Discord加群,一起来玩吧</p>
-    </div>
-    <div class="shang_payimg">
-        <div class="pay_img">
-            <img src="/img/discord.png" class="ufo001" title="感谢支持">
-            <img src="/img/dis2.png" class="ufo002" title="感谢支持">
-        </div>
-    </div>
-    <div class="shang_payselect">
-        <span><label><input type="radio" name="ufo" checked value="ufo001">二维码</label></span><span><label><input type="radio" name="ufo" value="ufo002">链接</label></span>
-    </div>
-</div>
-
-
 <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/hibiki.model.json"},"display":{"position":"right","width":250,"height":600},"mobile":{"show":false,"scale":0.4,"position":"right"},"react":{"opacity":0.7},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 <script src="/js/jquery.pjax.js?v=1.1.0" ></script>
 
@@ -475,14 +465,6 @@
         
 
         /*渲染打赏样式*/
-        
-        $("input[name=ufo]").on("click", function () {
-            if($("input[name=ufo]:checked").val()=="ufo002"){
-                $(".shang_box .shang_payimg .pay_img").addClass("ufo002_img");
-            } else {
-                $(".shang_box .shang_payimg .pay_img").removeClass("ufo002_img");
-            }
-        })
         
 
         /*高亮代码块行号*/
@@ -747,11 +729,6 @@
     }
 
     /*打赏页面隐藏与展示*/
-    
-    function dashangToggle() {
-        $(".shang_box").fadeToggle();
-        $(".hide_box").fadeToggle();
-    }
     
 
 </script>
