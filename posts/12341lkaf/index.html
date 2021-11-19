@@ -12,7 +12,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
-  <meta name="theme-color" content="#872e30">
+  <meta name="theme-color" content="#2f4154">
   <meta name="description" content="">
   <meta name="author" content="Z3rg">
   <meta name="keywords" content="">
@@ -83,7 +83,7 @@
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand" href="/">
-      <strong>/// Hacklog</strong>
+      <strong>root@Hacklog:~$</strong>
     </a>
 
     <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
@@ -163,7 +163,7 @@
 </nav>
 
     <div class="banner" id="banner" parallax=true
-         style="background: url('https://s3.bmp.ovh/imgs/2021/11/f61959033dd49bcb.gif') no-repeat center center;
+         style="background: url('/img/default.jpg') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
@@ -242,7 +242,7 @@
 <p>这下就有来头了，这wsl2装好之后，发现这是个非常强大功能，直接在windows上运行了linux环境。</p>
 <p><img src="/posts/12341lkaf/1.png" srcset="/img/loading.gif" lazyload></p>
 <p>但由于默认是在C盘下，C盘有限的空间不能装太多东西，于是就将其导出，然后换个盘重新导入</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs sh">wsl --list -v	<span class="hljs-comment">#查看当前环境的列表</span><br>wsl --<span class="hljs-built_in">export</span> xxx x:/xxx.tar	<span class="hljs-comment">#导出</span><br>wsl --unregister xxx	<span class="hljs-comment">#将原来的卸载</span><br>wsl --import xxx x:/xxx x:/xxx.tar --version 2 <span class="hljs-comment">#导入</span><br>xxx config --default-user xxx <span class="hljs-comment">#重新配置一下原来的默认账户，否则默认是root</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sh">wsl --list -v	<span class="hljs-comment">#查看当前环境的列表</span><br>wsl --<span class="hljs-built_in">export</span> xxx x:/xxx.tar	<span class="hljs-comment">#导出</span><br>wsl --unregister xxx	<span class="hljs-comment">#将原来的卸载</span><br>wsl --import xxx x:/xxx x:/xxx.tar --version 2 <span class="hljs-comment">#导入</span><br>xxx config --default-user xxx <span class="hljs-comment">#重新配置一下原来的默认账户，否则默认是root</span><br></code></pre></div></td></tr></table></figure>
 
 
 
@@ -251,7 +251,7 @@
 <p>搞好后就可以开始搞docker了</p>
 <p>以一个古老的kms镜像举例</p>
 <p>拿到一个dockerfile</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sh">docker build -t kms:v1 .	<span class="hljs-comment">#先build一个镜像</span><br>dokcer run -i -p 1688:1688 kms:v1	<span class="hljs-comment">#启动kms:v1的container，容器端口映射到了本机的1688</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sh">docker build -t kms:v1 .	<span class="hljs-comment">#先build一个镜像</span><br>dokcer run -i -p 1688:1688 kms:v1	<span class="hljs-comment">#启动kms:v1的container，容器端口映射到了本机的1688</span><br></code></pre></div></td></tr></table></figure>
 
 <p><img src="/posts/12341lkaf/3.png" srcset="/img/loading.gif" lazyload></p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>这样一来container就起来了，docker-desktop还带有图像化界面可以操作，像vulhub这种有compose的，配置文件是yml，可以利用docker-compose up/down 来执行。</p>

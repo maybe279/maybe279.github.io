@@ -365,13 +365,13 @@ img[lazyload] {
     --body-bg-color: #1d1e23;
     --board-bg-color: #323337;
     --text-color: #c4c6c9;
-    --sec-text-color: #e63f3f;
+    --sec-text-color: #ff9900;
     --post-text-color: #c4c6c9;
     --post-heading-color: #c4c6c9;
-    --post-link-color: #1589e9;
+    --post-link-color: #ff9900;
     --link-hover-color: #ffe599;
     --link-hover-bg-color: #364151;
-    --navbar-bg-color: #872e30;
+    --navbar-bg-color: #000000;
     --navbar-text-color: #d0d0d0;
   }
   :root:not([data-user-color-scheme]) img,
@@ -447,13 +447,13 @@ img[lazyload] {
   --body-bg-color: #1d1e23;
   --board-bg-color: #323337;
   --text-color: #c4c6c9;
-  --sec-text-color: #e63f3f;
+  --sec-text-color: #ff9900;
   --post-text-color: #c4c6c9;
   --post-heading-color: #c4c6c9;
-  --post-link-color: #1589e9;
+  --post-link-color: #ff9900;
   --link-hover-color: #ffe599;
   --link-hover-bg-color: #364151;
-  --navbar-bg-color: #872e30;
+  --navbar-bg-color: #000000;
   --navbar-text-color: #d0d0d0;
 }
 [data-user-color-scheme='dark'] img,

