@@ -19,19 +19,19 @@
   <meta name="description" content="参考资料 https:&#x2F;&#x2F;paper.seebug.org&#x2F;1718&#x2F;  漏洞利用原理前一阵子的微软0day大洞，CVE-2021-40444，之前因为些杂七杂八的事情，错过了好时机，现在来补上。头一次研究这个方向的漏洞，过去都是渗透方面的漏洞，这个应该是属于红队方面的了，而且偏软件类，由于这方面知识储备不足，深层的漏洞原理也只是模糊了解，但不管怎么说，这个漏洞就当作初入这个领域的热身了。 Mic">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CVE-2021-40444">
-<meta property="og:url" content="https://swertluck.vip/posts/lsqwreoxckl/index.html">
+<meta property="og:url" content="https://maybe279.github.io/posts/lsqwreoxckl/index.html">
 <meta property="og:site_name" content="HackLog">
 <meta property="og:description" content="参考资料 https:&#x2F;&#x2F;paper.seebug.org&#x2F;1718&#x2F;  漏洞利用原理前一阵子的微软0day大洞，CVE-2021-40444，之前因为些杂七杂八的事情，错过了好时机，现在来补上。头一次研究这个方向的漏洞，过去都是渗透方面的漏洞，这个应该是属于红队方面的了，而且偏软件类，由于这方面知识储备不足，深层的漏洞原理也只是模糊了解，但不管怎么说，这个漏洞就当作初入这个领域的热身了。 Mic">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://swertluck.vip/posts/lsqwreoxckl/1.png">
-<meta property="og:image" content="https://swertluck.vip/posts/lsqwreoxckl/2.png">
-<meta property="og:image" content="https://swertluck.vip/posts/lsqwreoxckl/3.png">
+<meta property="og:image" content="https://maybe279.github.io/posts/lsqwreoxckl/1.png">
+<meta property="og:image" content="https://maybe279.github.io/posts/lsqwreoxckl/2.png">
+<meta property="og:image" content="https://maybe279.github.io/posts/lsqwreoxckl/3.png">
 <meta property="article:published_time" content="2021-09-21T10:27:45.368Z">
 <meta property="article:modified_time" content="2021-09-21T12:36:16.796Z">
 <meta property="article:author" content="z3rg">
 <meta property="article:tag" content="漏洞">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://swertluck.vip/posts/lsqwreoxckl/1.png">
+<meta name="twitter:image" content="https://maybe279.github.io/posts/lsqwreoxckl/1.png">
   
   <title>CVE-2021-40444 - HackLog</title>
 
@@ -70,7 +70,7 @@
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"swertluck.vip","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname"}},"search_path":"/local-search.xml"};
+    var CONFIG = {"hostname":"maybe279.github.io","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname"}},"search_path":"/local-search.xml"};
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
