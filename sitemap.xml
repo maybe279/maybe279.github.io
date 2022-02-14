@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://maybe279.github.io/posts/afi21o348dookwen/</loc>
+    
+    <lastmod>2022-02-14</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://maybe279.github.io/posts/01odjfnkla/</loc>
     
     <lastmod>2021-11-19</lastmod>
@@ -187,6 +194,13 @@
   
   <url>
     <loc>https://maybe279.github.io/tags/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/</loc>
+    <lastmod>2022-02-14</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://maybe279.github.io/tags/%E5%BC%80%E5%8F%91/</loc>
     <lastmod>2022-02-14</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
