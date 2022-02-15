@@ -6,7 +6,7 @@
   <link href="https://maybe279.github.io/atom.xml" rel="self"/>
   
   <link href="https://maybe279.github.io/"/>
-  <updated>2022-02-14T12:41:14.932Z</updated>
+  <updated>2022-02-15T13:28:52.807Z</updated>
   <id>https://maybe279.github.io/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>【开发篇】expcollect</title>
+    <link href="https://maybe279.github.io/posts/expcollect23slk30wl/"/>
+    <id>https://maybe279.github.io/posts/expcollect23slk30wl/</id>
+    <published>2022-02-15T12:06:36.728Z</published>
+    <updated>2022-02-15T13:28:52.807Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="成果"><a href="#成果" class="headerlink" title="成果"></a>成果</h2><p>每日定期巡航搜索expdb新出的exp，保存至数据库并经行邮件提醒，可以组件化。</p><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>这两个项目开发过程中学习并运用了不少新知识，sched的调度任务，多线程中的锁，对于数据库的运用也熟练了非常多。</p><p><img src="/posts/expcollect23slk30wl/123asfq.png"></p><p><img src="/posts/expcollect23slk30wl/wqrds.png"></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;成果&quot;&gt;&lt;a href=&quot;#成果&quot; class=&quot;headerlink&quot; title=&quot;成果&quot;&gt;&lt;/a&gt;成果&lt;/h2&gt;&lt;p&gt;每日定期巡航搜索expdb新出的exp，保存至数据库并经行邮件提醒，可以组件化。&lt;/p&gt;
+&lt;h2 id=&quot;总结&quot;&gt;&lt;a href=&quot;#总结&quot;</summary>
+      
+    
+    
+    
+    
+    <category term="开发" scheme="https://maybe279.github.io/tags/%E5%BC%80%E5%8F%91/"/>
+    
+  </entry>
   
   <entry>
     <title>【开发篇】vulncollect</title>

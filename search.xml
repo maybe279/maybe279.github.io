@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>【开发篇】expcollect</title>
+      <link href="/posts/expcollect23slk30wl/"/>
+      <url>/posts/expcollect23slk30wl/</url>
+      
+        <content type="html"><![CDATA[<h2 id="成果"><a href="#成果" class="headerlink" title="成果"></a>成果</h2><p>每日定期巡航搜索expdb新出的exp，保存至数据库并经行邮件提醒，可以组件化。</p><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>这两个项目开发过程中学习并运用了不少新知识，sched的调度任务，多线程中的锁，对于数据库的运用也熟练了非常多。</p><p><img src="/posts/expcollect23slk30wl/123asfq.png"></p><p><img src="/posts/expcollect23slk30wl/wqrds.png"></p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> 开发 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【开发篇】vulncollect</title>
       <link href="/posts/afi21o348dookwen/"/>
       <url>/posts/afi21o348dookwen/</url>

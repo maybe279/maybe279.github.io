@@ -16,29 +16,23 @@
   <meta name="description" content="">
   <meta name="author" content="z3rg">
   <meta name="keywords" content="">
-  <meta name="description" content="目标针对一个MC正版服，有百人规模，受好友委托想要让其游戏角色获得op权限，不进行任何破坏性举动，腐竹亦是好友的好友。 我也懒得打码了，就把过程完完整整放出来吧啊(～￣▽￣)～ MC开服方法 本地搭建然后内网穿透 购买vps搭建 第三方面板服 Realms  思路 如果对方存在面板，可以尝试进面板然后加附带后门的插件 如果存在其他服务如ssh，ftp或者有网站、开放数据库等，进行测试看看能不能进去">
+  <meta name="description" content="成果每日定期巡航搜索expdb新出的exp，保存至数据库并经行邮件提醒，可以组件化。 总结这两个项目开发过程中学习并运用了不少新知识，sched的调度任务，多线程中的锁，对于数据库的运用也熟练了非常多。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="MINECRACK（第一章）">
-<meta property="og:url" content="https://maybe279.github.io/posts/12danfl2w/index.html">
+<meta property="og:title" content="【开发篇】expcollect">
+<meta property="og:url" content="https://maybe279.github.io/posts/expcollect23slk30wl/index.html">
 <meta property="og:site_name" content="HackLog">
-<meta property="og:description" content="目标针对一个MC正版服，有百人规模，受好友委托想要让其游戏角色获得op权限，不进行任何破坏性举动，腐竹亦是好友的好友。 我也懒得打码了，就把过程完完整整放出来吧啊(～￣▽￣)～ MC开服方法 本地搭建然后内网穿透 购买vps搭建 第三方面板服 Realms  思路 如果对方存在面板，可以尝试进面板然后加附带后门的插件 如果存在其他服务如ssh，ftp或者有网站、开放数据库等，进行测试看看能不能进去">
+<meta property="og:description" content="成果每日定期巡航搜索expdb新出的exp，保存至数据库并经行邮件提醒，可以组件化。 总结这两个项目开发过程中学习并运用了不少新知识，sched的调度任务，多线程中的锁，对于数据库的运用也熟练了非常多。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://maybe279.github.io/posts/12danfl2w/image-20210911233239293.png">
-<meta property="og:image" content="https://maybe279.github.io/posts/12danfl2w/image-20210911233158538.png">
-<meta property="og:image" content="https://maybe279.github.io/posts/12danfl2w/image-20210911234710682.png">
-<meta property="og:image" content="https://maybe279.github.io/posts/12danfl2w/image-20210912134221703.png">
-<meta property="og:image" content="https://maybe279.github.io/posts/12danfl2w/image-20210912134329865.png">
-<meta property="og:image" content="https://maybe279.github.io/posts/12danfl2w/image-20210911235620088.png">
-<meta property="og:image" content="https://maybe279.github.io/posts/12danfl2w/image-20210911234134836.png">
-<meta property="og:image" content="https://maybe279.github.io/posts/12danfl2w/image-20210911232532116.png">
-<meta property="article:published_time" content="2021-09-11T16:11:12.958Z">
-<meta property="article:modified_time" content="2021-11-19T11:01:25.203Z">
+<meta property="og:image" content="https://maybe279.github.io/posts/expcollect23slk30wl/123asfq.png">
+<meta property="og:image" content="https://maybe279.github.io/posts/expcollect23slk30wl/wqrds.png">
+<meta property="article:published_time" content="2022-02-15T12:06:36.728Z">
+<meta property="article:modified_time" content="2022-02-15T13:28:52.807Z">
 <meta property="article:author" content="z3rg">
-<meta property="article:tag" content="实战">
+<meta property="article:tag" content="开发">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://maybe279.github.io/posts/12danfl2w/image-20210911233239293.png">
+<meta name="twitter:image" content="https://maybe279.github.io/posts/expcollect23slk30wl/123asfq.png">
   
-  <title>MINECRACK（第一章） - HackLog</title>
+  <title>【开发篇】expcollect - HackLog</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
 
@@ -173,7 +167,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="MINECRACK（第一章）">
+            <span class="h2" id="subtitle" title="【开发篇】expcollect">
               
             </span>
 
@@ -188,8 +182,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-09-12 00:11" pubdate>
-        2021年9月12日 凌晨
+      <time datetime="2022-02-15 20:06" pubdate>
+        2022年2月15日 晚上
       </time>
     </span>
   
@@ -199,7 +193,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      920 字
+      100 字
     </span>
   
 
@@ -208,7 +202,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      3 分钟
+      1 分钟
     </span>
   
 
@@ -237,56 +231,13 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">MINECRACK（第一章）</h1>
+            <h1 style="display: none">【开发篇】expcollect</h1>
             
             <div class="markdown-body">
-              <h2 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h2><p>针对一个MC正版服，有百人规模，受好友委托想要让其游戏角色获得op权限，不进行任何破坏性举动，腐竹亦是好友的好友。</p>
-<p>我也懒得打码了，就把过程完完整整放出来吧啊(～￣▽￣)～</p>
-<h2 id="MC开服方法"><a href="#MC开服方法" class="headerlink" title="MC开服方法"></a>MC开服方法</h2><ol>
-<li>本地搭建然后内网穿透</li>
-<li>购买vps搭建</li>
-<li>第三方面板服</li>
-<li>Realms</li>
-</ol>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><ol>
-<li>如果对方存在面板，可以尝试进面板然后加附带后门的插件</li>
-<li>如果存在其他服务如ssh，ftp或者有网站、开放数据库等，进行测试看看能不能进去</li>
-<li>进行资产收集看看其他目标有没有突破口</li>
-<li>C段测试其他目标弱点，看看是不是处于一个内网</li>
-<li>社会工程学，想办法让服主说出面板密码（如果存在），或者让他装上带后门的插件</li>
-</ol>
-<h2 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h2><p>首先做信息收集，已知其游戏服务器进入的域名为 yicraft.xyz，打算查他的ip，先ping了目标，然后ping不通，尝试nslookup，发现挂了VPN的查的到，不挂查不到，同时发现这是个NS解析的域名，推测是绑了cdn，但是这又很不符合特征，绑了cdn也应该查的到，就非常的奇怪</p>
-<p><img src="/posts/12danfl2w/image-20210911233239293.png" srcset="/img/loading.gif" lazyload></p>
-<p><img src="/posts/12danfl2w/image-20210911233158538.png" srcset="/img/loading.gif" lazyload></p>
-<p>尝试直接进游戏然后tasklist看pid，再netstat查看对应的tcp连接，对比进服和没进服的连接，推测出了IP地址</p>
-<ul>
-<li>222.187.254.89:30890</li>
-</ul>
-<p><img src="/posts/12danfl2w/image-20210911234710682.png" srcset="/img/loading.gif" lazyload></p>
-<p>将游戏地址改成这个IP和端口，成功进入</p>
-<p><img src="/posts/12danfl2w/image-20210912134221703.png" srcset="/img/loading.gif" lazyload></p>
-<p><img src="/posts/12danfl2w/image-20210912134329865.png" srcset="/img/loading.gif" lazyload></p>
-<p>然后我尝试找出为什么会导致查不到ip的原因，最终在油管上找到了一个反查ip的视频，他说了目标服务器用了SRV解析隐藏了真实域名，不过他直接ping出来ip地址（伪的）了，我尝试用相同的方法，成功获取到域名，还得到和刚才一样的ip以及新域名</p>
-<ul>
-<li>mc33.starmc.cn</li>
-<li>e5-a14-auto.7skyun.com</li>
-</ul>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=DJnXztiyAmI">https://www.youtube.com/watch?v=DJnXztiyAmI</a></li>
-</ul>
-<p><img src="/posts/12danfl2w/image-20210911235620088.png" srcset="/img/loading.gif" lazyload></p>
-<p>把服务器地址改为出来的mc33.starmc.cn进入，结果被断了，应该是服务器没有对这个域名提供服务</p>
-<p><img src="/posts/12danfl2w/image-20210911234134836.png" srcset="/img/loading.gif" lazyload></p>
-<p><img src="/posts/12danfl2w/image-20210911232532116.png" srcset="/img/loading.gif" lazyload></p>
-<p>至此，我们已经得到了目标服务器的IP地址，但是针对其的资产收集还有各种测试还有待完成，就暂且先做到这，等以后有空再继续进行渗透。</p>
-<blockquote>
-<p>[服务器IP] 222.187.254.89:30890</p>
-<p>[真实域名] mc33.starmc.cn</p>
-<p>[伪装域名] yicraft.xyz</p>
-<p>[未知] e5-a14-auto.7skyun.com</p>
-</blockquote>
-<h3><center>未完待续</center></h3>
-
+              <h2 id="成果"><a href="#成果" class="headerlink" title="成果"></a>成果</h2><p>每日定期巡航搜索expdb新出的exp，保存至数据库并经行邮件提醒，可以组件化。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>这两个项目开发过程中学习并运用了不少新知识，sched的调度任务，多线程中的锁，对于数据库的运用也熟练了非常多。</p>
+<p><img src="/posts/expcollect23slk30wl/123asfq.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/posts/expcollect23slk30wl/wqrds.png" srcset="/img/loading.gif" lazyload></p>
 
             </div>
             <hr>
@@ -297,7 +248,7 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/%E5%AE%9E%E6%88%98/">实战</a>
+                      <a class="hover-with-bg" href="/tags/%E5%BC%80%E5%8F%91/">开发</a>
                     
                   </div>
                 
@@ -314,15 +265,15 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/posts/01odjfnkla/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">MINECRACK（第二章）</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
+                    
+                      <a href="/posts/afi21o348dookwen/">
+                        <span class="hidden-mobile">【开发篇】vulncollect</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
                     
                   </article>
                 </div>
