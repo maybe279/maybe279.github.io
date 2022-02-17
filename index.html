@@ -258,7 +258,7 @@
     padding:10px;
   }
   .button8:hover {
-    border: cyan 3px solid;
+    border: rgba(130, 255, 255, 0.828) 3px solid;
     margin:3px auto;/*让菱形浏览器上居中*/  
     background-color:rgba(255,255,255,0.2);
     border-radius:10px;
@@ -311,18 +311,30 @@
   .banner33{
     position:relative;
     width: auto;
-    max-width: 50px;
-    margin:5px auto;
-    align-self: center;
+    max-width: 100%;
     height: auto;
-    opacity: 0.9;
-    max-height: 50px;
-    float: right;
+    max-height: 100%;
+    border-radius: 100%;
+    border: rgba(226, 64, 43, 0.794) double 10px;
+    animation: banner33 linear 30 infinite;
+    /* opacity: 0.9; */
+    /* max-height: 500px; */
   }
+  @keyframes banner33{
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+          }
 </style>
-<h3>首页 <font style="color: #69ca62;">></font><img src="/img/watchdog.jpg" srcset="/img/loading.gif" lazyload class="banner33"></h3>
+<div style="text-align:center;">
+<h1><font style="color: #ff5e00bc;"><</font> HOME <font style="color: #69ca62;">></font></h1>
+<div style="height:auto;width:auto;max-width:550px;border:dashed 10px #ff9100b9;border-radius:100%;padding: 20px;margin: 0 auto;animation:banner33 linear 30s infinite"><img src="/img/artworks.jpg" srcset="/img/loading.gif" lazyload class="banner33"></div>
+</div>
 <hr>
-<h3>文章列表 <font style="color: #69ca62;">></font></h3>
+<!-- <h3 style="text-align: center;"><font style="color: #69ca62;"><</font> 文章列表 <font style="color: #69ca62;">></font></h3> -->
 
   <div class="row mx-auto index-card button8">
     
