@@ -16,23 +16,24 @@
   <meta name="description" content="">
   <meta name="author" content="z3rg">
   <meta name="keywords" content="">
-  <meta name="description" content="成果每日定期巡航搜索expdb新出的exp，保存至数据库并经行邮件提醒，可以组件化。 总结这两个项目开发过程中学习并运用了不少新知识，sched的调度任务，多线程中的锁，对于数据库的运用也熟练了非常多。">
+  <meta name="description" content="年度总结  好久没写过什么总结了，回头想了想，发生了好多事，遇见了好多人。还记得两年前我刚开始了解这一块的时候，收集了好多资料和各种课程，跟着视频从最简单的做起，那时什么都不懂，还被虚拟机的NAT和桥接困扰过很久，很多时候找资料也找不到，正巧碰上人生最黑暗的时光，可谓是起步艰巨。没多久疫情来了，不知道怎么说好，疫情让我没法去干以前的体力活了，但是给了我喘息的机会，遥想18、19年那会，虽然社会表面">
 <meta property="og:type" content="article">
-<meta property="og:title" content="【开发篇】expcollect">
-<meta property="og:url" content="https://maybe279.github.io/posts/expcollect23slk30wl/index.html">
+<meta property="og:title" content="【开发篇】年度总结&amp;开发全览">
+<meta property="og:url" content="https://maybe279.github.io/posts/16pigeon/index.html">
 <meta property="og:site_name" content="HackLog">
-<meta property="og:description" content="成果每日定期巡航搜索expdb新出的exp，保存至数据库并经行邮件提醒，可以组件化。 总结这两个项目开发过程中学习并运用了不少新知识，sched的调度任务，多线程中的锁，对于数据库的运用也熟练了非常多。">
+<meta property="og:description" content="年度总结  好久没写过什么总结了，回头想了想，发生了好多事，遇见了好多人。还记得两年前我刚开始了解这一块的时候，收集了好多资料和各种课程，跟着视频从最简单的做起，那时什么都不懂，还被虚拟机的NAT和桥接困扰过很久，很多时候找资料也找不到，正巧碰上人生最黑暗的时光，可谓是起步艰巨。没多久疫情来了，不知道怎么说好，疫情让我没法去干以前的体力活了，但是给了我喘息的机会，遥想18、19年那会，虽然社会表面">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://maybe279.github.io/posts/expcollect23slk30wl/123asfq.png">
-<meta property="og:image" content="https://maybe279.github.io/posts/expcollect23slk30wl/wqrds.png">
-<meta property="article:published_time" content="2022-02-15T12:06:36.728Z">
-<meta property="article:modified_time" content="2022-02-15T13:28:52.807Z">
+<meta property="og:image" content="https://maybe279.github.io/posts/16pigeon/a2293925b2ea42cb15876810ebf1dc5.jpg">
+<meta property="og:image" content="https://maybe279.github.io/posts/16pigeon/image-20220219031606082.png">
+<meta property="og:image" content="https://maybe279.github.io/posts/16pigeon/image-20220219031958477.png">
+<meta property="article:published_time" content="2022-02-18T17:05:59.555Z">
+<meta property="article:modified_time" content="2022-02-18T19:31:52.690Z">
 <meta property="article:author" content="z3rg">
 <meta property="article:tag" content="开发">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://maybe279.github.io/posts/expcollect23slk30wl/123asfq.png">
+<meta name="twitter:image" content="https://maybe279.github.io/posts/16pigeon/a2293925b2ea42cb15876810ebf1dc5.jpg">
   
-  <title>【开发篇】expcollect - HackLog</title>
+  <title>【开发篇】年度总结&amp;开发全览 - HackLog</title>
 
   <link  rel="stylesheet" href="/css/bootstrap.min.css" />
 
@@ -167,7 +168,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.4)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="【开发篇】expcollect">
+            <span class="h2" id="subtitle" title="【开发篇】年度总结&amp;开发全览">
               
             </span>
 
@@ -182,8 +183,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2022-02-15 20:06" pubdate>
-        2022年2月15日 晚上
+      <time datetime="2022-02-19 01:05" pubdate>
+        2022年2月19日 凌晨
       </time>
     </span>
   
@@ -193,7 +194,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      100 字
+      2.3k 字
     </span>
   
 
@@ -202,7 +203,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      1 分钟
+      7 分钟
     </span>
   
 
@@ -239,13 +240,26 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">【开发篇】expcollect</h1>
+            <h1 style="display: none">【开发篇】年度总结&amp;开发全览</h1>
             
             <div class="markdown-body">
-              <h2 id="成果"><a href="#成果" class="headerlink" title="成果"></a>成果</h2><p>每日定期巡航搜索expdb新出的exp，保存至数据库并经行邮件提醒，可以组件化。</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>这两个项目开发过程中学习并运用了不少新知识，sched的调度任务，多线程中的锁，对于数据库的运用也熟练了非常多。</p>
-<p><img src="/posts/expcollect23slk30wl/123asfq.png" srcset="/img/loading.gif" lazyload></p>
-<p><img src="/posts/expcollect23slk30wl/wqrds.png" srcset="/img/loading.gif" lazyload></p>
+              <h1>年度总结</h1>
+
+<p>好久没写过什么总结了，回头想了想，发生了好多事，遇见了好多人。还记得两年前我刚开始了解这一块的时候，收集了好多资料和各种课程，跟着视频从最简单的做起，那时什么都不懂，还被虚拟机的NAT和桥接困扰过很久，很多时候找资料也找不到，正巧碰上人生最黑暗的时光，可谓是起步艰巨。没多久疫情来了，不知道怎么说好，疫情让我没法去干以前的体力活了，但是给了我喘息的机会，遥想18、19年那会，虽然社会表面上到处都是飞速发展，但是我也已经被压的喘不过气来了。再说起学习这一块，当初大多都是敷衍了事，三分钟热度，最后不了了之，只是这个念想一直都在。然后到一年前，机缘巧合遇到了老大，他直接刷新了我对这一行的认知，同时也让我对黑客这一块的脉络清晰了非常多，了解到web渗透，内网等等，然后我就正式决定向这一块发展。</p>
+<p>从老大那里我真的悟到很多，不仅仅是渗透，更多的是对世界对社会的理解与认知，他还有他那一套以小见大的智慧，我记得二战时有个间谍只看当地的报纸和等等细节就能推断出具体发生了什么，可以说老大已经非常接近这个层次了，我显然还不具备他这般超群的能力，他见多识广能言善道，但是他的那套理念也一度成为我的心魔，似乎用金钱衡量了一切，他也是走东南亚美洲的，最后经过各种思想斗争，以及长达近一年的精神内耗，我还是选择了放下，虽然我和老大已经分道扬镳，但是也算是一个另类的贵人了，所以我还是以老大称呼他。</p>
+<p>这半年里我也试着开始去学校和同学交流，说实话我对人际交往是不太在行，很难把握好分寸，不过老大之前有告诉过我人际关系的智慧，总结一下就是要多换位思考，很简单对吧，但通常很难想起来这茬，不过我还是交到了几个不错的朋友，其中有个同样是技术宅的小罗，他非常了解各种手机，我记得有一回想着刷机，就算搞坏了还能问一问小罗，就买了个一加5刷kali nethunter，网上就一篇csdn的博客有教程，结果不管线刷卡刷都传不了，最后才发现是卖家送的线的问题。不过nethunter刷成后也就一直放着了，本来是想做无线渗透的，但是他的网卡不支持，现在手机直接都能远程桌面了，linux也有ssh客户端可以连接，所以nethunter的用处并不大，不过拿来装一装b倒是不错的。</p>
+<p>而在年末我又机缘巧合下遇到了另一位贵人，lsh4ck，我称呼他为乐师傅，博客现在加上了友链功能，乐师傅也在友链里，我和乐师傅第一次相遇是在两年前我刚刚开始了解黑客这一块领域的时候，在hack学习的群里有推广卖他内网渗透的pdf，那天我正好一起念就去买了，然后巧了，付完钱没pdf，最后hack学习把乐师傅的微信给了我，我就去问了下，然后发现是支付接口出问题了，乐师傅就把pdf直接发我了，后面他还研究命理学，我还找他看过几次，而且他了解很多玄学知识，刷新了我对世界的理解，那些玄学的东西仔细听下来非常有劲，而且感觉是一整套完全的体系。真没想到一开始就遇上了大佬两年后才开始联系，时间看似快，回头仔细想想其实发生了非常多的事，只是我们没去在意所以显得过去的时间很快。</p>
+<p>不再说太多过去的事了，我们应该立足于当下放眼于未来，主要是想传递一种坚韧的精神，自学刚开始碰到各种困难卡死是真的很难受，但是坚持下来，每一天都是进步，之后虽然不是一马平川但是也比刚开始的悬崖峭壁好走，安全这个坑也确实够深，足够咋门折腾了。</p>
+<p>看一下这一阵子做的成果吧</p>
+<h2 id="ZERTOOLKIT"><a href="#ZERTOOLKIT" class="headerlink" title="ZERTOOLKIT"></a>ZERTOOLKIT</h2><p>这一套本来是为了致敬metasploit的，他和ZERTOOLKIT-web版是我肝的最久也是最用心的一套，因为这是我特别想做的一件事，也不求什么其他的，就像是做艺术品一样，我对zertoolkit是最满意的，上千行代码，可以自定义各种模块，但是写完之后就没咋用了，感觉自己有些喜新厌旧哈哈哈，但是我现在发现他的实用性其实是非常强的，整个就是一个命令行框架，加之现在手机可以直接连接服务器，其实作为一个泛用性python工具集，不用web版也是可以的</p>
+<p><img src="/posts/16pigeon/a2293925b2ea42cb15876810ebf1dc5.jpg" srcset="/img/loading.gif" lazyload></p>
+<h2 id="ZERTOOLKIT-WEB"><a href="#ZERTOOLKIT-WEB" class="headerlink" title="ZERTOOLKIT-WEB"></a>ZERTOOLKIT-WEB</h2><p>web版的zertoolkit是用的django做的，是两个月前的作品了，其实可以做一个新的web版了，用flask加vue.js还有数据库，现在我对这些都有比之前更好的理解，之前纯粹是堆工堆出来的，后续可以再重新开发一下</p>
+<p><video src="dc415d4795323f221e06ee8ce63e9799.mp4" type="video/mp4" controls="controls" width="100%" height="100%"></video></p>
+<h2 id="ZERHIVE"><a href="#ZERHIVE" class="headerlink" title="ZERHIVE"></a>ZERHIVE</h2><p>这套的前端我倒是认认真真做了很久，但是这套我并不是很满意，zerhive是基于flask的蓝图一个个拼功能上去的，但是前后端交互就让开发过程变得非常长，完全不如zertoolkit那样直接写一个脚本文件，然后引入那样方便，不过这个我打算是一个个完整项目直接整合进去，就当是有个好看前端了，就比如后门的信鸽Pigeon，web版数据库已经做好了，不过没搞前端只是毛胚房。</p>
+<p><img src="/posts/16pigeon/image-20220219031606082.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="Pigeon"><a href="#Pigeon" class="headerlink" title="Pigeon"></a>Pigeon</h2><p>信鸽，前面两篇博文做的漏洞exp情报收集的功能，我把他数据库中的数据以web形式呈现出来，然后是可以直接模糊查询的，这一套完全用的axios请求，这样的话无刷新页面就能获取数据，非常舒服，也让我把javascript给学好了，之前js水平一直很烂，还利用数据库语法配合前端vue和js做了个分页功能，到时候可以整合到Hive里面去。</p>
+<p><img src="/posts/16pigeon/image-20220219031958477.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>暂时就这么多了，如果一直看的朋友应该会发现博客变得更酷了，我其实花了2天时间爆改博客源码hhh，这三个月写了上万多行代码，一年前我还非常菜的时候，刚被老大打了鸡血开始拿工具干，结果直接被封ip，然后去问了乐师傅咋办，他告诉我用代理池，我那时舍不得花钱买，研究了一晚上github上的那个proxypool，再想想现在的自己，好像成了那时候心中的大神，顺着自己开心的路走，反而比功利心太强走的更远。</p>
 
             </div>
             <hr>
@@ -273,18 +287,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/posts/16pigeon/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">【开发篇】年度总结&开发全览</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/posts/afi21o348dookwen/">
-                        <span class="hidden-mobile">【开发篇】vulncollect</span>
+                      <a href="/posts/expcollect23slk30wl/">
+                        <span class="hidden-mobile">【开发篇】expcollect</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
