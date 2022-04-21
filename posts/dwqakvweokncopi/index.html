@@ -16,26 +16,20 @@
   <meta name="description" content="">
   <meta name="author" content="z3rg">
   <meta name="keywords" content="">
-  <meta name="description" content="开始忙着调节生物钟，躺平了几天，整理了下思路，昨天突发奇想想开发些脚本玩一玩，像啥自动化游戏，抢红包一类的，可能说是不务正业，但是就当是玩一玩了，然后去调查了一番，选择了nodescript也就是节点精灵作为我的开发工具，他的开发语言是Lua语言，一门基于c的脚本语言，我记得以前有个高中同学喜欢玩武装突袭，就是用的这门语言做mod。 过程看了俩小时lua的基础之后，直接开始整活，打算当晚给他办了。">
+  <meta name="description" content="同源策略同源策略，网上大致都有介绍，它是浏览器非常重要且基本的一个安全策略。 我最早认识到它的时候是想把300多个网络摄像机集成到一个html页面中，将其返回的视频内容直接在页面内显示，但是最后是被同源策略拦截而失败了。 其中最关键的点是，浏览器过滤掉了来自与当前url不同源就是跨域请求所发回来的响应，但是我们发过去的请求缺是被服务器所接受到的，也就是说我们插入xss的时候以及某些恶意javasc">
 <meta property="og:type" content="article">
-<meta property="og:title" content="微信抢红包">
-<meta property="og:url" content="https://maybe279.github.io/posts/qreiozlskj/index.html">
+<meta property="og:title" content="同源策略和CSRF研究及其与xss的组合拳">
+<meta property="og:url" content="https://maybe279.github.io/posts/dwqakvweokncopi/index.html">
 <meta property="og:site_name" content="HackLog">
-<meta property="og:description" content="开始忙着调节生物钟，躺平了几天，整理了下思路，昨天突发奇想想开发些脚本玩一玩，像啥自动化游戏，抢红包一类的，可能说是不务正业，但是就当是玩一玩了，然后去调查了一番，选择了nodescript也就是节点精灵作为我的开发工具，他的开发语言是Lua语言，一门基于c的脚本语言，我记得以前有个高中同学喜欢玩武装突袭，就是用的这门语言做mod。 过程看了俩小时lua的基础之后，直接开始整活，打算当晚给他办了。">
+<meta property="og:description" content="同源策略同源策略，网上大致都有介绍，它是浏览器非常重要且基本的一个安全策略。 我最早认识到它的时候是想把300多个网络摄像机集成到一个html页面中，将其返回的视频内容直接在页面内显示，但是最后是被同源策略拦截而失败了。 其中最关键的点是，浏览器过滤掉了来自与当前url不同源就是跨域请求所发回来的响应，但是我们发过去的请求缺是被服务器所接受到的，也就是说我们插入xss的时候以及某些恶意javasc">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://maybe279.github.io/posts/qreiozlskj/333.png">
-<meta property="og:image" content="https://maybe279.github.io/posts/qreiozlskj/444.png">
-<meta property="og:image" content="https://maybe279.github.io/posts/qreiozlskj/555.png">
-<meta property="og:image" content="https://maybe279.github.io/posts/qreiozlskj/222.jpg">
-<meta property="og:image" content="https://maybe279.github.io/posts/qreiozlskj/666.jpg">
-<meta property="article:published_time" content="2021-09-18T16:05:49.858Z">
-<meta property="article:modified_time" content="2022-04-21T13:14:35.775Z">
+<meta property="article:published_time" content="2022-04-21T12:59:18.968Z">
+<meta property="article:modified_time" content="2022-04-21T14:37:11.551Z">
 <meta property="article:author" content="z3rg">
-<meta property="article:tag" content="开发">
+<meta property="article:tag" content="Hacking">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://maybe279.github.io/posts/qreiozlskj/333.png">
   
-  <title>微信抢红包 - HackLog</title>
+  <title>同源策略和CSRF研究及其与xss的组合拳 - HackLog</title>
 
   <link  rel="stylesheet" href="/css/bootstrap.min.css" />
 
@@ -182,7 +176,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.4)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="微信抢红包">
+            <span class="h2" id="subtitle" title="同源策略和CSRF研究及其与xss的组合拳">
               
             </span>
 
@@ -197,8 +191,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-09-19 00:05" pubdate>
-        2021年9月19日 凌晨
+      <time datetime="2022-04-21 20:59" pubdate>
+        2022年4月21日 晚上
       </time>
     </span>
   
@@ -208,7 +202,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.1k 字
+      1.5k 字
     </span>
   
 
@@ -217,7 +211,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      4 分钟
+      5 分钟
     </span>
   
 
@@ -254,25 +248,20 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">微信抢红包</h1>
+            <h1 style="display: none">同源策略和CSRF研究及其与xss的组合拳</h1>
             
             <div class="markdown-body">
-              <h2 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h2><p>忙着调节生物钟，躺平了几天，整理了下思路，昨天突发奇想想开发些脚本玩一玩，像啥自动化游戏，抢红包一类的，可能说是不务正业，但是就当是玩一玩了，然后去调查了一番，选择了nodescript也就是节点精灵作为我的开发工具，他的开发语言是Lua语言，一门基于c的脚本语言，我记得以前有个高中同学喜欢玩武装突袭，就是用的这门语言做mod。</p>
-<h2 id="过程"><a href="#过程" class="headerlink" title="过程"></a>过程</h2><p>看了俩小时lua的基础之后，直接开始整活，打算当晚给他办了。首先是尝试模拟器来开发，奈何微信对模拟器的识别非常imba导致我不得不用本机装上节点精灵开始开发。</p>
-<p>进入开发页面</p>
-<p><img src="/posts/qreiozlskj/333.png" srcset="/img/loading.gif" lazyload></p>
-<p>创建脚本起名为wechat，就打算直接做一个抢红包软件。</p>
-<p>然后需要做的就是不断的采集节点，需要弹窗出来的消息节点，聊天界面的红包，还需要将已收的红包与未收的区别开来，并对打开红包和返回页面进行收集。</p>
-<p><img src="/posts/qreiozlskj/444.png" srcset="/img/loading.gif" lazyload></p>
-<p>一路定义好之后将代码逻辑整理好</p>
-<p><img src="/posts/qreiozlskj/555.png" srcset="/img/loading.gif" lazyload></p>
-<p>具体逻辑就是建立一个循环，当其中有true时就执行函数，将弹窗出来时就打开，当检查到我们处于聊天界面时就再检查有无未收的红包，有的话就点击红包，然后又会将上面的open变为True，接着就是back了，这样一来，就是一个完整的自动收红包流程。</p>
-<p><img src="/posts/qreiozlskj/222.jpg" srcset="/img/loading.gif" lazyload></p>
-<p>与朋友验证过后成功，开发完成，目前似乎需要检测到红包的顶部弹窗提示，所以等待抢的时候应该是需要离开微信的，也不清楚每一部手机的兼容性如何，具体还需测试，支持安卓不支持IOS，IOS用户可以上云手机直接用。这个脚本可以打包成app上云控，也不打算把他上架，看情况吧。</p>
-<h2 id="暗度陈仓部分"><a href="#暗度陈仓部分" class="headerlink" title="暗度陈仓部分"></a>暗度陈仓部分</h2><p>今天有朋友给我发了一张图，有点让我错愕，有些东西至今还有太多人不明白，而网络上也不存在关于某些方面的讨论与答案。鉴于法律的缘故，只能把某些事的原理剖析出来给大家参考。</p>
-<p><img src="/posts/qreiozlskj/666.jpg" srcset="/img/loading.gif" lazyload></p>
-<p>做个比喻吧，有一个人他怀里揣满炸弹，想去炸火车站，别问哪个站，他需要过许多道关口，每个关口都有安检门和监控，但是无人值守，安检门也没人值守，那人便把浑身包满很厚的锡纸，过了安检，并没有触发警报，就这样一路过了许多关口，顺利到达了火车站，假设他最后成功炸了站，那试问你觉得警察能不能调查到他，答案显而易见。更何况每个监控的背后还有大数据分析的加持。</p>
-<p>没出事之前，当然不会被查，但问题是出了事的话怎么办。不走关卡，而宽带就是一条充满关卡的路线，你可以选择绕道走，甚至多绕几条道。而找到一条道之后万一半路堵塞，你在尝试绕的时侯又是走的关卡，那样岂不就是白费功夫了。再解决这个问题之后，问题又来了即使你成功隐蔽了自己，你制作炸药的炸药原材料从何而来，你的购买记录、身份信息、过去的出行记录等等等，毕竟你不可能做到每时每刻都能隐蔽自己。对应到的可能是本机记录，可能是网卡地址、聊天记录、往期记录等等等。话题不再深入了，至于解题的思路，就靠悟了。</p>
+              <h2 id="同源策略"><a href="#同源策略" class="headerlink" title="同源策略"></a>同源策略</h2><p>同源策略，网上大致都有介绍，它是浏览器非常重要且基本的一个安全策略。</p>
+<p>我最早认识到它的时候是想把300多个网络摄像机集成到一个html页面中，将其返回的视频内容直接在页面内显示，但是最后是被同源策略拦截而失败了。</p>
+<p>其中最关键的点是，浏览器过滤掉了来自与当前url不同源就是跨域请求所发回来的响应，但是我们发过去的请求缺是被服务器所接受到的，也就是说我们插入xss的时候以及某些恶意javascript代码往服务器发送窃取的消息是会被服务器所接受到的，只不过返回包会被拦截，而如果不想使返回包被拦截，可以使用跨域资源共享机制CORS。</p>
+<h2 id="CSRF-amp-XSS组合"><a href="#CSRF-amp-XSS组合" class="headerlink" title="CSRF&amp;XSS组合"></a>CSRF&amp;XSS组合</h2><p>众所周知csrf更多是拿去钓鱼进行一些什么转账啊改密啊等等，但是这种操作现在大都有多重验证机制，导致利用面狭窄，csrf也没有什么威慑力，不过我们可以尝试各种trick，将csrf与其他洞结合成combo来进行攻击。</p>
+<p>先声明此处的XSS组合拳非存储型xss，第一存储型xss利用效果与此重叠且危害可以更大，第二因为存储型xss很少且利用较难。</p>
+<p>我们使用的是一种将2个小漏洞组合成一种突破口的combo，也就是反射型xss配合csrf。</p>
+<p>如果一个站点同时存在反射xss与csrf，那我们构造一个包含payload的恶意请求放在我们的恶意网站中，可以是&lt;’img’&gt;来包含如果是post型我们可以使用Ajax或构造form并写上触发的js来发送对应的请求，其功能就是获取cookie并发送给我们的后端，再将其发送给该站点的客服或者管理员等拥有高后台权限的用户，如果他打开了，我们便能获取到cookie以进入后台进行更进一步的渗透。</p>
+<p>这种利用组合如果存在于大型平台，如果能配合其他存在同质化用户群体的大流量平台的存储型xss，可以将危害进一步拉到非常高的地步。</p>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><p>最近搞了很多东西，也学到了不少，我今天研究了一下分布式系统，我认为如果要做一个分布式系统，那必须要让他有分布式运算，而不是说什么可以分布式交流就算分布式了，所以之前的zertoolkit-web压根不算分布式系统，我的思路是通过每台部署的轮子之间互相交换信息，然后统一收到一个任务之后同步至其他轮子，简单讲如果一个轮子受到任务，那么他会将任务以队列形式同时分发给其他轮子以同时进行，这样的话，部署的轮子越多，效率就越高。</p>
+<p>前阵子算是实际操作了下内网的东西，内网这一块我基本就没咋学过，没什么思路，找了老师傅帮忙看了看，大致学到了点基本功，比如win系统下查看任务进程pid，找rdp对应端口等等，ngork，frp，nps，lcx这些手段来出网等等。</p>
+<p>然后今天还打算实践一下之前一直没试的隐蔽招数，cdn配域名再绑ip，结果tmd，买这种不实名的域名外网基本都是绑信用卡，易贝卡现在停止个人用户了，我尝试tb搞了一个卡结果不行，gv号注册paypal美区又停止voip注册，服了，限制越来越多没办法，我研究了一下有些卖aws的注册卡可以尝试一下，aws也可以买这种域名，但是暂时是不想烦了，tb奸商今天还骗掉我50块，给的卡这个不行那个不行还不能退，恶心人真的。本来还想到绑ipv6的情况，现在实验中止，话说不知道以后ipv6的情况下渗透又会有什么挑战，至少按ipv6所言，很多设备应该都是直接一个公网ip了，很多内网也就不复存在了，但是那么多ip段，全网怎么整理出来，怎么测绘又是一个大麻烦，还有个人用户们如果都暴露在公网的话，那么又会有什么利用手段呢？这些都是未知数，我想到，一些中大型内网还是会以ipv4的形式存在，而小区域及散户未来会以ipv6形式部署。</p>
 
             </div>
             <hr>
@@ -283,7 +272,7 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/%E5%BC%80%E5%8F%91/">开发</a>
+                      <a class="hover-with-bg" href="/tags/Hacking/">Hacking</a>
                     
                   </div>
                 
@@ -300,18 +289,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/posts/lsqwreoxckl/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">CVE-2021-40444</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/posts/zxvzqiqi/">
-                        <span class="hidden-mobile">OAS破解及V2代理拨号</span>
+                      <a href="/posts/16pigeon/">
+                        <span class="hidden-mobile">年度总结&开发全览</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
