@@ -16,18 +16,20 @@
   <meta name="description" content="">
   <meta name="author" content="z3rg">
   <meta name="keywords" content="">
-  <meta name="description" content="同源策略同源策略，网上大致都有介绍，它是浏览器非常重要且基本的一个安全策略。 我最早认识到它的时候是想把300多个网络摄像机集成到一个html页面中，将其返回的视频内容直接在页面内显示，但是最后是被同源策略拦截而失败了。 其中最关键的点是，浏览器过滤掉了来自与当前url不同源就是跨域请求所发回来的响应，但是我们发过去的请求缺是被服务器所接受到的，也就是说我们插入xss的时候以及某些恶意javasc">
+  <meta name="description" content="同源策略同源策略，网上大致都有介绍，它是浏览器非常重要且基本的一个安全策略。  我最早认识到它的时候是想把300多个网络摄像机集成到一个html页面中，将其返回的视频内容直接在页面内显示，但是最后是被同源策略拦截而失败了。 其中最关键的点是，浏览器过滤掉了来自与当前url不同源就是跨域请求所发回来的响应，但是我们发过去的请求缺是被服务器所接受到的，也就是说我们插入xss的时候以及某些恶意javas">
 <meta property="og:type" content="article">
 <meta property="og:title" content="同源策略和CSRF研究及其与xss的组合拳">
 <meta property="og:url" content="https://maybe279.github.io/posts/dwqakvweokncopi/index.html">
 <meta property="og:site_name" content="HackLog">
-<meta property="og:description" content="同源策略同源策略，网上大致都有介绍，它是浏览器非常重要且基本的一个安全策略。 我最早认识到它的时候是想把300多个网络摄像机集成到一个html页面中，将其返回的视频内容直接在页面内显示，但是最后是被同源策略拦截而失败了。 其中最关键的点是，浏览器过滤掉了来自与当前url不同源就是跨域请求所发回来的响应，但是我们发过去的请求缺是被服务器所接受到的，也就是说我们插入xss的时候以及某些恶意javasc">
+<meta property="og:description" content="同源策略同源策略，网上大致都有介绍，它是浏览器非常重要且基本的一个安全策略。  我最早认识到它的时候是想把300多个网络摄像机集成到一个html页面中，将其返回的视频内容直接在页面内显示，但是最后是被同源策略拦截而失败了。 其中最关键的点是，浏览器过滤掉了来自与当前url不同源就是跨域请求所发回来的响应，但是我们发过去的请求缺是被服务器所接受到的，也就是说我们插入xss的时候以及某些恶意javas">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://maybe279.github.io/posts/dwqakvweokncopi/image-20220421225834330.png">
 <meta property="article:published_time" content="2022-04-21T12:59:18.968Z">
-<meta property="article:modified_time" content="2022-04-21T14:37:11.551Z">
+<meta property="article:modified_time" content="2022-04-21T14:58:55.869Z">
 <meta property="article:author" content="z3rg">
 <meta property="article:tag" content="Hacking">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://maybe279.github.io/posts/dwqakvweokncopi/image-20220421225834330.png">
   
   <title>同源策略和CSRF研究及其与xss的组合拳 - HackLog</title>
 
@@ -252,6 +254,7 @@
             
             <div class="markdown-body">
               <h2 id="同源策略"><a href="#同源策略" class="headerlink" title="同源策略"></a>同源策略</h2><p>同源策略，网上大致都有介绍，它是浏览器非常重要且基本的一个安全策略。</p>
+<p><img src="/posts/dwqakvweokncopi/image-20220421225834330.png" srcset="/img/loading.gif" lazyload></p>
 <p>我最早认识到它的时候是想把300多个网络摄像机集成到一个html页面中，将其返回的视频内容直接在页面内显示，但是最后是被同源策略拦截而失败了。</p>
 <p>其中最关键的点是，浏览器过滤掉了来自与当前url不同源就是跨域请求所发回来的响应，但是我们发过去的请求缺是被服务器所接受到的，也就是说我们插入xss的时候以及某些恶意javascript代码往服务器发送窃取的消息是会被服务器所接受到的，只不过返回包会被拦截，而如果不想使返回包被拦截，可以使用跨域资源共享机制CORS。</p>
 <h2 id="CSRF-amp-XSS组合"><a href="#CSRF-amp-XSS组合" class="headerlink" title="CSRF&amp;XSS组合"></a>CSRF&amp;XSS组合</h2><p>众所周知csrf更多是拿去钓鱼进行一些什么转账啊改密啊等等，但是这种操作现在大都有多重验证机制，导致利用面狭窄，csrf也没有什么威慑力，不过我们可以尝试各种trick，将csrf与其他洞结合成combo来进行攻击。</p>
